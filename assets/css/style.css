@@ -1,4 +1,5 @@
 @charset 'UTF-8';
+@import url(http://fonts.googleapis.com/css?family=Courgette);
 
 @font-face
 {
@@ -23,6 +24,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 
 /*
 	Miniport 2.0 by HTML5 UP
@@ -101,7 +103,7 @@
 	
 		h1 strong
 		{
-			font-weight: 700;
+			font-weight: 600;
 		}
 	
 	em, i
@@ -261,12 +263,12 @@
 		border-radius: 8px;
 		text-shadow: -1px -1px 0.5px rgba(0,0,0,0.5);
 		overflow: hidden;
-		background: #61b8db;
-		background-image: -moz-linear-gradient(top, rgba(97,184,219,0), rgba(48,141,196,1));
-		background-image: -webkit-linear-gradient(top, rgba(97,184,219,0), rgba(48,141,196,1));
-		background-image: -o-linear-gradient(top, rgba(97,184,219,0), rgba(48,141,196,1));
-		background-image: -ms-linear-gradient(top, rgba(97,184,219,0), rgba(48,141,196,1));
-		background-image: linear-gradient(top, rgba(97,184,219,0), rgba(48,141,196,1));
+		background: #ea8a95;
+		background-image: -moz-linear-gradient(top, rgba(97,184,219,0), rgba(250,150,150,1));
+		background-image: -webkit-linear-gradient(top, rgba(97,184,219,0), rgba(250,150,150,1));
+		background-image: -o-linear-gradient(top, rgba(97,184,219,0), rgba(250,150,150,1));
+		background-image: -ms-linear-gradient(top, rgba(97,184,219,0), rgba(250,150,150,1));
+		background-image: linear-gradient(top, rgba(97,184,219,0), rgba(250,150,150,1));
 		box-shadow: inset 0px 0px 0px 1px #135c86, inset 0px 2px 1px 0px rgba(255,255,255,0.75);
 		-moz-transition: background-color .2s ease-in-out;
 		-webkit-transition: background-color .2s ease-in-out;
@@ -289,14 +291,14 @@
 
 		.button:hover
 		{
-			background-color: #76cdf0;
+			background-color: #f00924;
 			color: #fff !important;
 		}
 		
 		.button:active
 		{
 			background-image: -moz-linear-gradient(top, rgba(48,141,196,1), rgba(77,164,199,0));
-			background-image: -webkit-linear-gradient(top, rgba(48,141,196,1), rgba(77,164,199,0));
+			background-image: -webkit-linear-gradient(top, rgba(245,100,150,1), rgba(77,164,199,0));
 			background-image: -o-linear-gradient(top, rgba(48,141,196,1), rgba(77,164,199,0));
 			background-image: -ms-linear-gradient(top, rgba(48,141,196,1), rgba(77,164,199,0));
 			background-image: linear-gradient(top, rgba(48,141,196,1), rgba(77,164,199,0));
@@ -332,6 +334,12 @@
 	
 		.button-big
 		{
+		}
+		
+		.button-small
+		{
+			font-weight: 200;
+			padding: .5 1.15 .5 1.15;		
 		}
 
 	ul.social
@@ -431,6 +439,11 @@
 		{
 			position: relative;
 		}
+
+	.name{
+		font-family: Courgette;
+		font-size: 10em;
+	}
 
 /*********************************************************************************/
 /* Icons                                                                         */

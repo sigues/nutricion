@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Miniport by HTML5 UP</title>
+		<title>Nutrisanissimo</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -32,6 +32,7 @@
 					<li><a href="#work">Nosotros</a></li>
 					<li><a href="#portfolio">Casos de éxito</a></li>
 					<li><a href="#contact">Contacto</a></li>
+					<li><button class="button-small button">Iniciar sesión</button></li>
 				</ul>
 			</nav>
 
@@ -40,12 +41,12 @@
 				<article class="container" id="top">
 					<div class="row">
 						<div class="4u">
-							<span class="me image image-full"><img src="assets/images/me.jpg" alt="" /></span>
+							<span class=" image image-full"><img src="assets/images/logo.png" alt="" /></span>
 						</div>
 						<div class="8u">
 							<header>
-								<h1>Hola, bienvenido a <strong>Nutrisa</strong>.</h1>
-							<p>En este sitio te ayudaremos a encontrar tu peso idea, proporcionándote las herramientas necesarias para llevar un conteo de las calorias que consumes y las que quemas.</p>
+								<h1>Hola, bienvenido a <strong>Nutrisano</strong>.</h1>
+							<p>En este sitio te ayudaremos a encontrar tu peso ideal, proporcionándote las herramientas necesarias para llevar un conteo de las calorias que consumes y las que quemas.</p>
 							</header>
 							<a href="#work" class="button button-big">Aprende mas sobre nosotros.</a>
 						</div>

@@ -77,6 +77,13 @@
 			letter-spacing: -0.025em;
 		}
 
+		.button-small
+		{
+			font-size: .9em;
+			padding: .5 1.15 .5 1.15;		
+		}
+
+
 	.box
 	{
 		padding: 2em 2em 2.5em 2em;
