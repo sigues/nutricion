@@ -6,7 +6,7 @@
 
 window._skel_config = {
 	preset: 'standard',
-	prefix: 'assets/css/style',
+	prefix: jQuery('#base_url').value+'assets/css/style',
 	resetCSS: true,
 	breakpoints: {
 		'desktop': {
