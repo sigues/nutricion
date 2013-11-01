@@ -24,7 +24,7 @@
 		<!--[if lte IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
 	</head>
 	<body>
-
+		<input type="hidden" id="base_url" name="base_url" value="<?=base_url()?>" />
 		<!-- Nav -->
 			<nav id="nav">
 				<ul class="container">

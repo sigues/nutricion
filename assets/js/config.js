@@ -3,10 +3,10 @@
 	html5up.net | @n33co
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-
+console.log(jQuery('#base_url'));
 window._skel_config = {
 	preset: 'standard',
-	prefix: jQuery('#base_url').value+'assets/css/style',
+	prefix: '/nutricion/assets/css/style',
 	resetCSS: true,
 	breakpoints: {
 		'desktop': {
