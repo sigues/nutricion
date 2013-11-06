@@ -4,8 +4,9 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data["contenido"] = $this->load->view('base',null,true);
-		$this->load->view('template',$data);
+		$data["contenido"] = $this->load->view('template',null,true);
+
+		$this->load->view('base',$data);
 	}
 
 	public function controlpanel()
