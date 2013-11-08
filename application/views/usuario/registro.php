@@ -75,7 +75,25 @@
 						<input type="checkbox" class="checkbox" id="agree" name="agree" />
 					</p>
 					<p>
-						<input class="submit" type="submit" value="Submit"/>
+						<input class="submit" type="submit" value="Registrarse" name="registrarse" id="registrarse"/>
 					</p>
 				</fieldset>
 			</form>
+				    <div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox">
+      </span>
+      <input type="text" class="form-control">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <input type="radio">
+      </span>
+      <input type="text" class="form-control">
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->

@@ -87,12 +87,14 @@
 
 <?php
 if(!isset($main)){ ?>
+<div class="row">
 	<div class="fondoMenu" style="height:90px">
 	</div>
+</div>
 <?php } ?>
 <?=$contenido?>
-
-	<div class="container marketing" id="nosotros">
+<div class="row">
+  	<div class="container marketing" id="nosotros">
   	<!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -100,7 +102,7 @@ if(!isset($main)){ ?>
       </footer>
 
     </div><!-- /.container -->
-
+</div>
 
     <!-- Le javascript
     ================================================== -->

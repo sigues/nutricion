@@ -1,5 +1,5 @@
 $(document).ready(function(){
-		$("#registro").validate({
+/*		$("#registro").validate({
 		rules: {
 			nombre: {
 				required: true,
@@ -46,6 +46,6 @@ $(document).ready(function(){
 			agree: "Favor de aceptar las políticas de privacidad"
 		}
 	});
-
+*/
 });
 
