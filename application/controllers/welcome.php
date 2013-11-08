@@ -4,7 +4,14 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data["contenido"] = $this->load->view('template',null,true);
+		$data["main"] = true;
+		$data["contenido"] = $this->load->view('bootstrap',$data,true);
+		$this->load->view('template',$data);
+	}
+
+	public function tabs()
+	{
+		$data["contenido"] = $this->load->view('tabs',null,true);
 
 		$this->load->view('base',$data);
 	}
@@ -12,6 +19,11 @@ class Welcome extends CI_Controller {
 	public function controlpanel()
 	{
 		$this->load->view('controlpanel');
+	}
+
+	public function bootstrap()
+	{
+		$this->load->view('bootstrap');
 	}
 }
 
