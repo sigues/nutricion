@@ -1,35 +1,12 @@
 <?php
 
-//var_dump($paises);
+var_dump($this->session->all_userdata());
 ?>
     <script src="<?=base_url()?>/assets/js/jquery.validate.js"></script>
     <script src="<?=base_url()?>/assets/js/lib/registro.js"></script>
     
- <!--   <form class="form-horizontal" method="post" id="registro" name="registro">
-    <div class="control-group">
-    <label class="control-label" for="inputEmail">Email</label>
-    <div class="controls">
-    <input type="text" id="inputEmail" placeholder="Email">
-    </div>
-    </div>
-    <div class="control-group">
-    <label class="control-label" for="inputPassword">Password</label>
-    <div class="controls">
-    <input type="password" id="inputPassword" placeholder="Password">
-    </div>
-    </div>
-    <div class="control-group">
-    <div class="controls">
-    <label class="checkbox">
-    <input type="checkbox"> Remember me
-    </label>
-    <button type="submit" class="btn">Sign in</button>
-    </div>
-    </div>
-    </form>!-->
 <div class="container marketing" id="nosotros">
 
-      <!-- Three columns of text below the carousel -->
       <div class="row">
       	<div class="span2">
       	<br>
@@ -37,11 +14,14 @@
         <div class="span10">
     	    <form class="form-horizontal" method="post" id="registro" name="registro" method="get" action="">
 				<fieldset>
-					<legend>Gracias por registrarse</legend>
-					<div class="control-group">
+					<legend>Gracias por registrarse - Paso 1</legend>
+          <?php echo validation_errors('<span class="label label-danger">','</span><br>'); ?>
+          <br>
+          <div class="control-group">
 				    	<label class="control-label" for="email">Correo Electrónico</label>
 				    	<div class="controls">
 				    	<input type="text" id="email" name="email" placeholder="Email">
+              <label for="email" class="error" id="validaEmail" style="display:none">La dirección de correo que eligió ya está ocupada.</label>
 				    	</div>
 				    </div>
 				    <div class="control-group">
@@ -59,41 +39,22 @@
 					<div class="control-group">
 				    	<label class="control-label" for="password">Contraseña</label>
 				    	<div class="controls">
-				    	<input type="text" name="password" id="password" placeholder="Contraseña">
+				    	<input type="password" name="password" id="password" placeholder="Contraseña">
 				    	</div>
 				    </div>
-					<div class="control-group">
-						<label class="control-label" for="confirm_password">Confirmar contraseña</label>
-				    	<div class="controls">
-				    	<input type="text" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña">
-				    	</div>
-				    </div>
-
-
+          <div class="control-group">
+            <label class="control-label" for="confirm_password">Confirmar contraseña</label>
+              <div class="controls">
+              <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirmar contraseña">
+              </div>
+          </div>
 					<p>
-						<label for="agree">Estoy de acuerdo con las políticas de privacidad</label>
-						<input type="checkbox" class="checkbox" id="agree" name="agree" />
+					   <input type="checkbox" id="agree" name="agree" />&nbsp;&nbsp;<label for="agree" style="display:inline">Estoy de acuerdo con las políticas de privacidad</label>
 					</p>
 					<p>
-						<input class="submit" type="submit" value="Registrarse" name="registrarse" id="registrarse"/>
+            <input type="hidden" name="inputRegistro" id="inputRegistro" value="registro" />
+            <button type="button" class="btn btn-default btn-lg active" id="reset" name="reset">Limpiar formulario</button>
+            <button type="button" class="btn btn-info active" name="registrarse" id="registrarse" value="registrarse">Registrarse</button>
 					</p>
 				</fieldset>
 			</form>
-				    <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox">
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="radio">
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->

@@ -2,21 +2,38 @@
 
 class Usuariomodel extends CI_Model {
 
-    var $title   = '';
-    var $content = '';
-    var $date    = '';
+    var $idusuario = '';
+    var $correo = '';
+    var $contrasena = '';
+    var $nombre = '';
+    var $apellido = '';
+    var $sexo = '';
+    var $fechaNacimiento = '';
+    var $perfil = '';
+    var $ciudad_idciudad = '';
 
     function __construct()
     {
         parent::__construct();
     }
 
-    function altaUsuario(){
-    	$query = $this->db->get("pais");
-    	$paises = array();
-    	foreach($query->result() as $row){
-            $paises[$row->idpais] = $row;
-        }
-        return $paises;
+    function registroUsuario(){
+    	$datos = array("correo"=>$this->correo,
+                        "nombre"=>$this->nombre,
+                        "apellido"=>$this->apellido,
+                        "perfil"=>$this->perfil,
+                        "contrasena"=>md5($this->contrasena));
+        $usuario = $this->db->insert("usuario",$datos);
+        return $usuario;
+    }
+
+    function validarCorreo($correo){
+        $result = $this->db->get_where("usuario",array("correo"=>$correo));
+        return $result->row_array();
+    }
+
+    function getUsuarioLogin($correo,$contrasena){
+        $result = $this->db->get_where("usuario",array("correo"=>$correo,"contrasena"=>$contrasena));
+        return $result->row_array();
     }
 }

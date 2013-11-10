@@ -43,7 +43,7 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing" id="nosotros">
+    <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
@@ -72,17 +72,16 @@
 
       <hr class="featurette-divider">
 
-      <div class="featurette" id="servicios">
+      <div class="featurette" id="cursos">
         <img class="featurette-image pull-right" src="<?=base_url()?>/assets/img/examples/browser-icon-chrome.png">
         <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
-
       <hr class="featurette-divider">
 
-      <div class="featurette">
-        <img class="featurette-image pull-left" src="<?=base_url()?>/assets/img/examples/browser-icon-firefox.png">
-        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
+      <div class="featurette" id="productos">
+        <img class="featurette-image pull-right" src="<?=base_url()?>/assets/img/examples/browser-icon-chrome.png">
+        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
 

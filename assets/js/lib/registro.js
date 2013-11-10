@@ -1,5 +1,5 @@
 $(document).ready(function(){
-/*		$("#registro").validate({
+		$("#registro").validate({
 		rules: {
 			nombre: {
 				required: true,
@@ -46,6 +46,43 @@ $(document).ready(function(){
 			agree: "Favor de aceptar las políticas de privacidad"
 		}
 	});
-*/
+
+	$("#registrarse").click(function(){
+		if($("#validaEmail").is(":visible")){
+			alert("huevos puto");
+			return false;
+		}
+		$("#registro").submit();
+
+	});
+
+	$("#reset").click(function(){
+		$('#registro').find("input").each(function(){
+		  $(this).val("");
+		});
+	});
+
+	$("#email").change(function(){
+		$("#validaEmail").hide();
+		$.ajax({
+                    url: $("#base_url").val()+"index.php/usuario/validarCorreo",
+                    type: "post",
+                    dataType: "json",
+                    data:{
+                        estado:$("#email").val()
+                    },
+                    success: function( strData ){
+                    	console.log(strData.lenght);
+                    	if(strData.valido==true){
+                    		$("#validaEmail").show();
+                    	}else{
+                    		$("#validaEmail").hide();
+                    	}
+                    }
+                });
+	});
+
+
+
 });
 
