@@ -5,7 +5,7 @@ class Welcome extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		if($this->session->userdata("is_logged") == true){
-			echo $this->session->userdata("is_logged")."<--";
+//			echo $this->session->userdata("is_logged")."<--";
 		} else {
 			$this->session->set_userdata("is_logged",false);			
 		}

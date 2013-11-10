@@ -9,7 +9,7 @@ class Usuario extends CI_Controller {
 		if($this->input->post("inputRegistro") == "registro"){
 			$registro = $this->validarFormulario($this->input->post());
 			if($registro == true){
-				redirect('/usuario/controlpanel/', 'refresh');
+				//redirect('/usuario/controlpanel/', 'refresh');
 			} 
 		}
 
@@ -34,7 +34,7 @@ class Usuario extends CI_Controller {
 			$this->usuariomodel->apellido = $this->input->post("apellido");
 			$this->usuariomodel->contrasena = $this->input->post("password");
 			$this->usuariomodel->perfil = 1;
-			//$this->usuariomodel->registroUsuario();
+			$this->usuariomodel->registroUsuario();
 
 			$newdata = array(
                    'nombre'  => $this->input->post("nombre"),

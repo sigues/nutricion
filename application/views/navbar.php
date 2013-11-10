@@ -53,11 +53,11 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="#">Administrar perfiles</a></li>
-                          <li><a href="#">Administrar grupos alimenticios</a></li>
-                          <li><a href="#">Administrar dietas</a></li>
-                          <li><a href="#">Administrar recetas</a></li>
-                          <li><a href="#">Administrar publicaciones</a></li>
+                          <li><a href="<?=site_url("admin/catalogoPerfiles")?>">Administrar perfiles</a></li>
+                          <li><a href="<?=site_url("admin/catalogoGrupos")?>">Administrar grupos alimenticios</a></li>
+                          <li><a href="<?=site_url("admin/catalogoDietas")?>">Administrar dietas</a></li>
+                          <li><a href="<?=site_url("admin/catalogoRecetas")?>">Administrar recetas</a></li>
+                          <li><a href="<?=site_url("admin/catalogoPublicaciones")?>">Administrar publicaciones</a></li>
                         </ul>
                       </li>
                 <?php  }

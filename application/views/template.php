@@ -80,9 +80,7 @@ if(!isset($main)){ ?>
     <script src="<?=base_url()?>/assets/js/bootstrap-carousel.js"></script>
     <script src="<?=base_url()?>assets/js/bootstrap-typeahead.js"></script>
     <?php
-                	if(isset($main)){
-                		echo 'class="active"';
-                		?>
+                	if(isset($main)){ ?>
 					    <script src="<?=base_url()?>assets/js/plugins.js"></script>
 					    <script>
 					         $('#top-nav').onePageNav({
