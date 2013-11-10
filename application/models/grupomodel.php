@@ -1,0 +1,18 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Grupomodel extends CI_Model {
+
+    function __construct()
+    {
+        parent::__construct();
+    }
+
+    function getGrupos(){
+    	$query = $this->db->get("grupo");
+    	$grupos = array();
+    	foreach($query->result() as $row){
+            $grupos[$row->idgrupo] = $row;
+        }
+        return $grupos;
+    }
+}

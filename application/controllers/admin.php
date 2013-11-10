@@ -20,9 +20,10 @@ class Admin extends CI_Controller {
 			$crud->columns('idgrupo','nombre','codigo','descripcion');
 
 			$output = $crud->render();
+			$output->titulo = "Administrar grupos alimenticios";
+			$output->subtitulo = "Aquí se podrán administrar los diferentes grupos alimenticios, como son: Cereales y tubérculos, Cereales con grasa, Frutas, Verduras, etc.";
 
 			$data["contenido"] = $this->_example_output($output);
-
 			$this->load->view("template",$data);
 
 		}catch(Exception $e){
@@ -40,8 +41,11 @@ class Admin extends CI_Controller {
 			$crud->required_fields('nombre');
 			$crud->required_fields('codigo');
 			$crud->columns('idperfil','nombre','codigo','descripcion');
+			$crud->set_field_upload('img_url','assets/uploads/files');
 
 			$output = $crud->render();
+			$output->titulo = "Administrar perfiles";
+			$output->subtitulo = "Aquí se podrán administrar los perfiles de los usuarios, como son: Adultos, ancianos, niños, deportistas, etc.";
 
 			$data["contenido"] = $this->_example_output($output);
 
@@ -50,6 +54,17 @@ class Admin extends CI_Controller {
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
+	}
+
+	public function catalogoDietas(){
+		$this->load->model("grupomodel");
+		$this->load->model("perfilmodel");
+		$this->load->model("horariomodel");
+		$data["grupos"] = $this->grupomodel->getGrupos();
+		$data["perfiles"] = $this->perfilmodel->getPerfiles();
+		$data["horarios"] = $this->horariomodel->getHorarios();
+		$data["contenido"] = $this->load->view("admin/administrarDietas",$data,true);
+		echo $this->load->view("template",$data);
 	}
 
 	public function _example_output($output = null)

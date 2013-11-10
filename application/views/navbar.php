@@ -53,11 +53,11 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Catálogos<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="<?=site_url("admin/catalogoPerfiles")?>">Administrar perfiles</a></li>
-                          <li><a href="<?=site_url("admin/catalogoGrupos")?>">Administrar grupos alimenticios</a></li>
-                          <li><a href="<?=site_url("admin/catalogoDietas")?>">Administrar dietas</a></li>
-                          <li><a href="<?=site_url("admin/catalogoRecetas")?>">Administrar recetas</a></li>
-                          <li><a href="<?=site_url("admin/catalogoPublicaciones")?>">Administrar publicaciones</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoPerfiles")?>'" href="<?=site_url("admin/catalogoPerfiles")?>">Administrar perfiles</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoGrupos")?>'" href="<?=site_url("admin/catalogoGrupos")?>">Administrar grupos alimenticios</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoDietas")?>'" href="<?=site_url("admin/catalogoDietas")?>">Administrar dietas</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoRecetas")?>'" href="<?=site_url("admin/catalogoRecetas")?>">Administrar recetas</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoPublicaciones")?>'" href="<?=site_url("admin/catalogoPublicaciones")?>">Administrar publicaciones</a></li>
                         </ul>
                       </li>
                 <?php  }
@@ -66,7 +66,6 @@
                     <li><a href="<?=base_url()?>#productos">Productos</a></li>
                     <li><a href="<?=base_url()?>#contacto">Contacto</a></li>
                 <?php } ?>
-
               </ul>
               <?php if($this->session->userdata("is_logged")==false){ ?>
             	<form class="navbar-form pull-right form-inline " method="post" action="<?=site_url('usuario/iniciarSesion')?>">
