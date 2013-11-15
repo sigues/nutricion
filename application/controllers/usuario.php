@@ -40,7 +40,7 @@ class Usuario extends CI_Controller {
                    'nombre'  => $this->input->post("nombre"),
                    'correo'  => $this->input->post("correo"),
                    'perfil'	 => $this->input->post("email"),
-                   'logged_in' => TRUE
+                   'is_logged' => TRUE
                );
 			$this->session->set_userdata($newdata);
 

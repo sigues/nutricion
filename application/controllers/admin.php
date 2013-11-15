@@ -3,7 +3,7 @@
 class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
-		if($this->session->userdata("logged_in") != true && $this->session->userdata("perfil") != 2){
+		if($this->session->userdata("is_logged") != true && $this->session->userdata("perfil") != 2){
 			redirect(page_url(), 'refresh');
 		}
 		$this->load->library('grocery_CRUD');
@@ -18,6 +18,7 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Grupos Alimenticios');
 			$crud->required_fields('nombre','codigo');
 			$crud->columns('idgrupo','nombre','codigo','descripcion');
+			$crud->callback_column('nombre',array($this,'linkEditaGrupo'));
 
 			$output = $crud->render();
 			$output->titulo = "Administrar grupos alimenticios";
@@ -73,4 +74,8 @@ class Admin extends CI_Controller {
 		return $ex_output;
 	}
 
+	public function linkEditaGrupo($value,$row){
+		return "<a href=".site_url("admin/editaGrupos/".$row->idgrupo).">".$value."</a>";
+	}
 }
+
