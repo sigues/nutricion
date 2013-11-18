@@ -77,5 +77,27 @@ class Admin extends CI_Controller {
 	public function linkEditaGrupo($value,$row){
 		return "<a href=".site_url("admin/editaGrupos/".$row->idgrupo).">".$value."</a>";
 	}
+
+	public function verificaCodigoDieta(){
+		$codigo = $_POST["codigo"];
+		$this->load->model("dietamodel");
+		$dieta = $this->dietamodel->verificaCodigo($codigo);
+		$data = array("valid"=>"false");
+		if($dieta == false){
+			$data["valid"] = "true";
+		}else{
+			$data["valid"] = "false";
+		}
+		echo json_encode($data);
+	}
+
+	public function guardaDieta(){
+		$dieta["info"] = $_POST["dieta"];
+		$dieta["horario_grupo"] = $_POST["horario_grupo"];
+		$dieta["perfiles"] = $_POST["perfiles"];
+
+		echo json_encode($dieta);
+	}
+
 }
 

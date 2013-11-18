@@ -20,6 +20,8 @@
 
 				<p><label for="codigo">Código *</label>
 					<input type="text" class="input-medium" id="codigo" name="codigo" />
+					<label style="color:#B94A48; display:none" id="labelCodigo" >Debe incluir un código para la dieta</label>
+					<label style="color:#B94A48; display:none" id="labelCodigoUnico" >Este código ya está ocupado</label>
 				</p>
 				<p><label for="descripcion">Descripción</label>
 					<textarea id="descripcion" name="descripcion" ></textarea>
@@ -29,9 +31,14 @@
 					<?php foreach($perfiles as $perfil){ ?>
 							<div class="checkbox">
 						        <label>
-						          <input type='checkbox' class='checkbox' name='perfil-<?=$perfil->idperfil?>' id='perfil-<?=$perfil->idperfil?>'/>
-						          <input type="checkbox"> <?=$perfil->nombre?>
+						          <input type='checkbox' class='checkbox checkbox-perfil' name='perfil-<?=$perfil->idperfil?>' idperfil='<?=$perfil->idperfil?>' id='perfil-<?=$perfil->idperfil?>'/>
+						          <?=$perfil->nombre?>
+						          
 						        </label>
+						        	<span style="display:block;margin-left:20px">
+							          Principal
+	  						          <input type='checkbox' class='checkbox-perfil-principal' disabled="disabled" name='principal-<?=$perfil->idperfil?>' id='principal-<?=$perfil->idperfil?>'/>
+  						          </span>
 						      </div>
 					<?php } ?>
 				</div>
@@ -53,10 +60,10 @@
 					<tbody>
 					<?php
 					foreach($grupos as $grupo){
-						echo "<tr><td><input type='text' class='input-mini' id='total-grupo-".$grupo->idgrupo."' readonly/></td>
+						echo "<tr><td><input type='text' class='input-mini' id='total-grupo-".$grupo->idgrupo."' idgrupo='".$grupo->idgrupo."' readonly /></td>
 								<td>".$grupo->nombre."</td>";
 						foreach($horarios as $horario){
-							echo "<td><input type='text' class='input-mini horario-grupo' id='".$grupo->idgrupo.'-'.$horario->idhorario."' /></td>";
+							echo "<td><input type='text' class='input-mini horario-grupo horario-grupo-".$grupo->idgrupo."' idgrupo='".$grupo->idgrupo."' idhorario='".$horario->idhorario."' id='".$grupo->idgrupo.'-'.$horario->idhorario."' /></td>";
 						}
 						echo "</tr>";
 					}
