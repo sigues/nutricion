@@ -1,7 +1,3 @@
-<?php
-
-var_dump($this->session->all_userdata());
-?>
     <script src="<?=base_url()?>/assets/js/jquery.validate.js"></script>
     <script src="<?=base_url()?>/assets/js/lib/registro.js"></script>
     
@@ -58,3 +54,6 @@ var_dump($this->session->all_userdata());
 					</p>
 				</fieldset>
 			</form>
+</div>
+</div>
+</div>

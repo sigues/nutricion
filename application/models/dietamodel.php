@@ -20,4 +20,13 @@ class Dietamodel extends CI_Model {
             return false;
         }
     }
+
+    function getDietas(){
+        $query = $this->db->get("dieta");
+        $dietas = array();
+        foreach($query->result() as $dieta){
+            $dietas[] = $dieta;
+        }
+        return $dietas;
+    }
 }

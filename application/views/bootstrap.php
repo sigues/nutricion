@@ -74,15 +74,17 @@
 
       <div class="featurette" id="cursos">
         <img class="featurette-image pull-right" src="<?=base_url()?>/assets/img/examples/browser-icon-chrome.png">
-        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <h2 class="featurette-heading">Cursos de nutrición. <span class="muted">Los mejores.</span></h2>
+        <p class="lead">Ofrecemos cursos de nutrición en línea, haz clic en el botón para ver mas información.</p>
+        <p><a class="btn btn-large" href="<?=site_url("menut/cursos")?>">Ver más &raquo;</a></p>
       </div>
       <hr class="featurette-divider">
 
       <div class="featurette" id="productos">
-        <img class="featurette-image pull-right" src="<?=base_url()?>/assets/img/examples/browser-icon-chrome.png">
-        <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
-        <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <img class="featurette-image pull-right" src="<?=base_url()?>/assets/img/examples/productos.png">
+        <h2 class="featurette-heading">Elige productos. <span class="muted">La mejor calidad.</span></h2>
+        <p class="lead">Puedes ver los productos que tenemos para ti. Visita nuestra galeria</p>
+        <p><a class="btn btn-large" href="<?=site_url("menut/productos")?>">Ver más &raquo;</a></p>
       </div>
 
       <hr class="featurette-divider" id="contacto">
@@ -99,9 +101,5 @@
 
 
       <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
-
+  
     </div><!-- /.container -->

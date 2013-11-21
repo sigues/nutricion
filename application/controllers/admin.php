@@ -58,12 +58,14 @@ class Admin extends CI_Controller {
 	}
 
 	public function catalogoDietas(){
+		$this->load->model("dietamodel");
 		$this->load->model("grupomodel");
 		$this->load->model("perfilmodel");
 		$this->load->model("horariomodel");
 		$data["grupos"] = $this->grupomodel->getGrupos();
 		$data["perfiles"] = $this->perfilmodel->getPerfiles();
 		$data["horarios"] = $this->horariomodel->getHorarios();
+		$data["dietas"] = $this->dietamodel->getDietas();
 		$data["contenido"] = $this->load->view("admin/administrarDietas",$data,true);
 		echo $this->load->view("template",$data);
 	}
