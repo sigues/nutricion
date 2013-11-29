@@ -32,6 +32,15 @@ class Usuariomodel extends CI_Model {
         return $result->row_array();
     }
 
+    function getUsuarios(){
+        $result = $this->db->get("usuario");
+        $usuarios = array();
+        foreach($result->result() as $usuario){
+            $usuarios[] = $usuario;
+        }
+        return $usuarios;
+    }
+
     function getUsuarioLogin($correo,$contrasena){
         $result = $this->db->get_where("usuario",array("correo"=>$correo,"contrasena"=>$contrasena));
         return $result->row_array();

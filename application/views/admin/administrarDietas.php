@@ -28,6 +28,16 @@
 				</p>
 				</div>
 				<div class="span6">
+					<p><input type="radio" id="tipoDietaPerfiles" class="tipoDieta" name="tipoDieta" value="perfiles"> Perfiles - <input type="radio" id="tipoDietaUsuario" class="tipoDieta" name="tipoDieta" value="usuarios">Usuarios</p>
+					<div id="div-usuarios">
+						<select multiple>
+						<?php 
+						foreach($usuarios as $usuario){ ?>
+							<option><?=$usuario->nombre." ".$usuario->apellido?></option>
+						<?php } ?>
+						</select>
+					</div>
+					<div id="div-perfiles">
 					<?php foreach($perfiles as $perfil){ ?>
 							<div class="checkbox">
 						        <label>
@@ -41,6 +51,7 @@
   						          </span>
 						      </div>
 					<?php } ?>
+					</div>
 				</div>
 			</div>
 			<div class="row">

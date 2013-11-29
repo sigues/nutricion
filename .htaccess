@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase /ipaw 
+RewriteCond $1 !^(index\.php|images|js|css|php-scripts|robots\.txt)
+RewriteRule ^(.*)$ index.php/$1 [L]

@@ -61,9 +61,12 @@ class Admin extends CI_Controller {
 		$this->load->model("grupomodel");
 		$this->load->model("perfilmodel");
 		$this->load->model("horariomodel");
+		$this->load->model("usuariomodel");
+
 		$data["grupos"] = $this->grupomodel->getGrupos();
 		$data["perfiles"] = $this->perfilmodel->getPerfiles();
 		$data["horarios"] = $this->horariomodel->getHorarios();
+		$data["usuarios"] = $this->usuariomodel->getUsuarios();
 		$data["contenido"] = $this->load->view("admin/administrarDietas",$data,true);
 		echo $this->load->view("template",$data);
 	}
