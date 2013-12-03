@@ -55,8 +55,12 @@
                         <ul class="dropdown-menu">
                           <li><a onclick="window.location='<?=site_url("admin/catalogoPerfiles")?>'" href="<?=site_url("admin/catalogoPerfiles")?>">Administrar perfiles</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoGrupos")?>'" href="<?=site_url("admin/catalogoGrupos")?>">Administrar grupos alimenticios</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoAlimentos")?>'" href="<?=site_url("admin/catalogoAlimentos")?>">Administrar alimentos</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoMedidas")?>'" href="<?=site_url("admin/catalogoMedidas")?>">Administrar medidas</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoDietas")?>'" href="<?=site_url("admin/catalogoDietas")?>">Administrar dietas</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoRecetas")?>'" href="<?=site_url("admin/catalogoRecetas")?>">Administrar recetas</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoCategorias")?>'" href="<?=site_url("admin/catalogoCategorias")?>">Administrar categorias de recetas</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoHorarios")?>'" href="<?=site_url("admin/catalogoHorarios")?>">Administrar horarios</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoPublicaciones")?>'" href="<?=site_url("admin/catalogoPublicaciones")?>">Administrar publicaciones</a></li>
                         </ul>
                       </li>

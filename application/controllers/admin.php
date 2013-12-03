@@ -18,7 +18,7 @@ class Admin extends CI_Controller {
 			$crud->set_subject('Grupos Alimenticios');
 			$crud->required_fields('nombre','codigo');
 			$crud->columns('idgrupo','nombre','codigo','descripcion');
-			$crud->callback_column('nombre',array($this,'linkEditaGrupo'));
+//			$crud->callback_column('nombre',array($this,'linkEditaGrupo'));
 
 			$output = $crud->render();
 			$output->titulo = "Administrar grupos alimenticios";
@@ -56,6 +56,143 @@ class Admin extends CI_Controller {
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}
+
+	public function catalogoHorarios(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('horario');
+			$crud->set_subject('Horarios');
+			$crud->required_fields('nombre');
+			$crud->columns('idhorario','nombre','descripcion');
+
+			$output = $crud->render();
+			$output->titulo = "Horarios";
+			$output->subtitulo = "Aquí se podrán administrar los horarios de las comidas, como son: Desayuno, colación, comida, colación, cena, snack";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	public function catalogoCategorias(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('categoria');
+			$crud->set_subject('Categorias de recetas');
+			$crud->required_fields('nombre');
+			$crud->required_fields('codigo');
+			$crud->columns('idcategoria','nombre','descripcion','codigo');
+
+			$output = $crud->render();
+			$output->titulo = "Categorias de recetas";
+			$output->subtitulo = "Aquí se podrán administrar las categorias de las recetas, como son: Vegetariano, pastas, mexicana, italiana, etc.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	public function catalogoMedidas(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('medida');
+			$crud->set_subject('Unidades de medida');
+			$crud->required_fields('nombre');
+			$crud->required_fields('abreviatura');
+			$crud->columns('idmedida','nombre','abreviatura');
+
+			$output = $crud->render();
+			$output->titulo = "Unidades de medida";
+			$output->subtitulo = "Aquí se podrán administrar las unidades de medida de los alimentos, como son: Kilo, cucharada, taza, etc.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	public function catalogoAlimentos(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('alimento');
+
+			$crud->set_relation('grupo_idgrupo','grupo','nombre');
+			$crud->display_as('grupo_idgrupo','Grupo Alimenticio');
+
+			$crud->set_relation('medida_idmedida','medida','nombre');
+			$crud->display_as('medida_idmedida','Unidad de Medida');
+
+			$crud->display_as('nombre','Alimento');
+			$crud->set_subject('alimentos');
+			$crud->required_fields('nombre');
+			$crud->required_fields('codigo');
+			$crud->columns('idalimento','nombre','descripcion','grupo_idgrupo');
+
+			$crud->set_field_upload('imagen','assets/uploads/files/alimentos');
+
+			$output = $crud->render();
+			$output->titulo = "Catálogo de Alimentos";
+			$output->subtitulo = "Aquí se podrán administrar los alimentos, agregarles categorias, cantidades, etc.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
+	public function catalogoRecetas(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('receta');
+
+			$crud->set_subject('recetas');
+			$crud->required_fields('nombre');
+			$crud->required_fields('codigo');
+			$crud->columns('receta','nombre','descripcion');
+
+			$crud->set_field_upload('imagen','assets/uploads/files/alimentos');
+
+			$crud->set_relation_n_n('alimentos', 'receta_has_alimento', 'alimento', 'receta_idreceta', 'alimento_idalimento', 'nombre');
+
+			$crud->set_relation_n_n('categorias', 'receta_has_categoria', 'categoria', 'receta_idreceta', 'categoria_idcategoria', 'nombre');
+ 
+			$output = $crud->render();
+			$output->titulo = "Catálogo de Recetas";
+			$output->subtitulo = "Aquí se podrán administrar las recetas";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
 
 	public function catalogoDietas(){
 		$this->load->model("dietamodel");
@@ -102,6 +239,33 @@ class Admin extends CI_Controller {
 		$dieta["perfiles"] = $_POST["perfiles"];
 
 		echo json_encode($dieta);
+	}
+
+	public function editaGrupos(){
+		$grupo = $this->uri->segment(3);
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('alimento');
+			$crud->set_subject('Alimentos');
+			$crud->required_fields('nombre');
+			$crud->required_fields('grupo_idgrupo');
+			$crud->required_fields('medida_idmedida');
+			$crud->columns('idalimento','nombre','descripcion','cantidad','grupo_idgrupo','medida_idmedida');
+			$crud->set_field_upload('imagen','assets/uploads/files');
+
+			$output = $crud->render();
+			$output->titulo = "Administrar alimentos";
+			$output->subtitulo = "Aquí se podrán administrar los alimentos.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
 	}
 
 }
