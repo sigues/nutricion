@@ -104,5 +104,32 @@ class Admin extends CI_Controller {
 		echo json_encode($dieta);
 	}
 
+	public function editaGrupos(){
+		$grupo = $this->uri->segment(3);
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('alimento');
+			$crud->set_subject('Alimentos');
+			$crud->required_fields('nombre');
+			$crud->required_fields('grupo_idgrupo');
+			$crud->required_fields('medida_idmedida');
+			$crud->columns('idalimento','nombre','descripcion','cantidad','grupo_idgrupo','medida_idmedida');
+			$crud->set_field_upload('imagen','assets/uploads/files');
+
+			$output = $crud->render();
+			$output->titulo = "Administrar alimentos";
+			$output->subtitulo = "Aquí se podrán administrar los alimentos.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
 }
 
