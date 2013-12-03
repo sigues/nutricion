@@ -43,6 +43,10 @@
                     <ul class="dropdown-menu">
                       <li><a href="#">Agendar consulta</a></li>
                       <li><a href="#">Ver historial de consultas</a></li>
+                <?php 
+                    if($this->session->userdata('perfil')==2){ ?>
+                          <li><a onclick="window.location='<?=site_url("admin/verAgenda")?>'" href="<?=site_url("admin/verAgenda")?>">Ver agenda</a></li>
+                    <?php } ?>
                     </ul>
                   </li>
                   <li>

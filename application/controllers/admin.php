@@ -268,5 +268,33 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function verAgenda(){
+		$data["titulo"][0]="Agenda";
+        $data["subtitulo"][0]="Citas de los pacientes";
+        /*$this->db->select('*');
+        $this->db->from('cita');
+        $this->db->join('paciente', 'cita.paciente_idpaciente = paciente.idpaciente');*/
+        $data["citas"] = new stdClass();//$this->db->get()->result();
+        $data["empleados"] = new stdClass();//$this->db->get_where("empleado", array("puesto"=>"dentista","activo"=>"si"))->result();
+        $this->db->where('cita.estado','pendiente');
+        $data["scriptAjax"]=$this->load->view('ajax/citas',$data,TRUE);
+        
+        /*$row = $this->db->query("SHOW COLUMNS FROM cita LIKE 'estado'")->row()->Type;
+        $regex = "/'(.*?)'/";
+        preg_match_all( $regex , $row, $enum_array );
+        $enum_fields = $enum_array[1];
+        foreach ($enum_fields as $key=>$value)
+        {
+            $enums[$value] = $value;
+        }*/
+
+        $data["estados"]= new stdClass();//$enums;
+        
+        
+        $data["contenido"]=$this->load->view('agenda',$data,TRUE);
+        $data["seccion"]="personal";
+        $this->load->view('template',$data);
+	}
+
 }
 
