@@ -235,20 +235,37 @@ class Admin extends CI_Controller {
 
 	public function guardaDieta(){
 		$dieta = $_POST["dieta"];
-
-		if($dieta->iddieta != 0){
+		$tempData = str_replace("\\", "",$dieta);
+		$dieta = json_decode($tempData);
+		
+		if($dieta->iddieta == 0){
 			$nueva_dieta = array("nombre"=>$dieta->nombre,"codigo"=>$dieta->codigo,"descripcion"=>$dieta->descripcion);
+			var_dump($nueva_dieta);die();
 			$this->db->insert("dieta",$nueva_dieta);
 			$iddieta = $this->db->insert_id();
 			if(sizeof($dieta->usuarios)>0){
-
+				foreach($dieta->usuarios as $usuario){
+					$usuario_has_dieta = array("usuario_idusuario"=>$usuario,"dieta_iddieta"=>$iddieta);
+					$this->db->insert("usuario_has_dieta",$nueva_dieta);
+				}
 			} else if(sizeof($dieta->perfiles)>0){
-				
+				foreach($dieta->perfiles as $c=>$perfil){
+					if($perfil->checked == true){
+						$principal = false;
+						if($perfil->principal == true){
+							$data = array(
+				               'default' => false
+				            );
+							$this->db->where('perfil_idperfil', $c);
+							$this->db->update('perfil_has_dieta', $data); 
+							$perfil = true;
+						}
+
+					}
+					$perfil_has_dieta = array();
+				}
 			}
 		}
-
-		/*$dieta["horario_grupo"] = $_POST["horario_grupo"];
-		$dieta["perfiles"] = $_POST["perfiles"];*/
 
 		echo json_encode($dieta);
 	}
