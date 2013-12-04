@@ -260,6 +260,7 @@ class Admin extends CI_Controller {
 							$this->db->update('perfil_has_dieta', $data); 
 							$perfil = true;
 						}
+						
 
 					}
 					$perfil_has_dieta = array();
