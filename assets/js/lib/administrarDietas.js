@@ -50,6 +50,20 @@ $(document).ready(function(){
 		});
 		$("#total-grupo-"+idgrupo).val(suma);
 	});
+
+	$(".tipoDieta").change(function(){
+		var tipoDieta = $('input:radio[name=tipoDieta]:checked').val();
+		if(tipoDieta == "usuarios"){
+			$("#div-usuarios").show();
+			$("#div-perfiles").hide();
+		} else if (tipoDieta == "perfiles"){
+			$("#div-usuarios").hide();
+			$("#div-perfiles").show();
+		}
+
+
+	});
+
 });
 
 function guardaDieta(){
@@ -57,21 +71,32 @@ function guardaDieta(){
 	dieta.nombre = $("#nombre").val();
 	dieta.codigo = $("#codigo").val();
 	dieta.descripcion = $("#descripcion").val();
+
 	var perfiles = {};
-	$(".checkbox-perfil").each(function(index){
-		var idperfil = $(this).attr("idperfil"); 
-		perfiles[idperfil] = {};
-		if($(this).is(":checked")){
-			perfiles[idperfil]["checked"] = true;
-		} else {
-			perfiles[idperfil]["checked"] = false;
-		}
-		if($("#principal-"+idperfil).is(":checked")){
-			perfiles[idperfil]["principal"] = true;
-		}else{
-			perfiles[idperfil]["principal"] = false;
-		}
-	});
+	var usuarios = {};
+
+	if($("#div-perfiles").is(":visible")){
+		$(".checkbox-perfil").each(function(index){
+			var idperfil = $(this).attr("idperfil"); 
+			perfiles[idperfil] = {};
+			if($(this).is(":checked")){
+				perfiles[idperfil]["checked"] = true;
+			} else {
+				perfiles[idperfil]["checked"] = false;
+			}
+			if($("#principal-"+idperfil).is(":checked")){
+				perfiles[idperfil]["principal"] = true;
+			}else{
+				perfiles[idperfil]["principal"] = false;
+			}
+		});
+	} else if($("#div-usuarios").is(":visible")){
+		usuarios = $("#usuarios").val();
+	}
+		
+
+
+	dieta.usuarios = usuarios;
 	dieta.perfiles = perfiles;
 	
 	var horario_grupo = {};
@@ -89,9 +114,7 @@ function guardaDieta(){
 			url: $("#base_url").val()+"index.php/admin/guardaDieta",
 			dataType: "json",
 			data: { 
-				dieta: JSON.stringify(dieta),
-				horario_grupo: JSON.stringify(horario_grupo),
-				perfiles: JSON.stringify(perfiles) 
+				dieta: JSON.stringify(dieta)
 			}/*,
 			success: function(response) {
 				console.log(response);
