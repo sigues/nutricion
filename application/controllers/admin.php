@@ -234,9 +234,21 @@ class Admin extends CI_Controller {
 	}
 
 	public function guardaDieta(){
-		$dieta["info"] = $_POST["dieta"];
-		$dieta["horario_grupo"] = $_POST["horario_grupo"];
-		$dieta["perfiles"] = $_POST["perfiles"];
+		$dieta = $_POST["dieta"];
+
+		if($dieta->iddieta != 0){
+			$nueva_dieta = array("nombre"=>$dieta->nombre,"codigo"=>$dieta->codigo,"descripcion"=>$dieta->descripcion);
+			$this->db->insert("dieta",$nueva_dieta);
+			$iddieta = $this->db->insert_id();
+			if(sizeof($dieta->usuarios)>0){
+
+			} else if(sizeof($dieta->perfiles)>0){
+				
+			}
+		}
+
+		/*$dieta["horario_grupo"] = $_POST["horario_grupo"];
+		$dieta["perfiles"] = $_POST["perfiles"];*/
 
 		echo json_encode($dieta);
 	}
