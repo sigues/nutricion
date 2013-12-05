@@ -260,6 +260,10 @@ class Admin extends CI_Controller {
 							$this->db->update('perfil_has_dieta', $data); 
 							$perfil = true;
 						}
+						$data = array('perfil_idperfil'=>$c,
+										'dieta_iddieta'=>$iddieta,
+										'default'=>$perfil->principal);
+						$this->db->insert('perfil_has_dieta');
 						
 
 					}
