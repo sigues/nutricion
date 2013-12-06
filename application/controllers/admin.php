@@ -4,7 +4,7 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		if($this->session->userdata("is_logged") != true && $this->session->userdata("perfil") != 2){
-			redirect(page_url(), 'refresh');
+			redirect(site_url(), 'refresh');
 		}
 		$this->load->library('grocery_CRUD');
 	}
