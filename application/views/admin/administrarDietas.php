@@ -3,15 +3,16 @@
 <form action="" class="form">
       <div class="row">
       	<div class="span2">
-      	<br>hhh
-      	<br>hhh
-      	<br>hhh
-      	<br>hhh
+      		<ul>
+      			<?php foreach($dietas as $vdieta){
+      				echo "<li><a href=\"".site_url()."/admin/catalogoDietas/".$vdieta->iddieta."\">".$vdieta->nombre."</a></li>";
+      			}?>
+      		</ul>
     	</div>
         <div class="span10">
         	<div class="row">
 				<p><h2>Nombre de la dieta *</h2>
-					<input type="text"  class="input-xxlarge" id="nombre" name="nombre" />
+					<input type="text"  class="input-xxlarge" id="nombre" name="nombre" value="<?=(isset($dieta["dieta"]->nombre))?$dieta["dieta"]->nombre:""?>" />
 					<label for="nombre" style="color:#B94A48; display:none" id="labelNombre" >Debe incluir un nombre para la dieta</label>
 				</p>
         	</div>
@@ -19,12 +20,12 @@
 	        	<div class="span4" style="text-align: left;">
 
 				<p><label for="codigo">Código *</label>
-					<input type="text" class="input-medium" id="codigo" name="codigo" />
+					<input type="text" class="input-medium" id="codigo" name="codigo" value="<?=(isset($dieta["dieta"]->codigo))?$dieta["dieta"]->codigo:""?>"/>
 					<label style="color:#B94A48; display:none" id="labelCodigo" >Debe incluir un código para la dieta</label>
 					<label style="color:#B94A48; display:none" id="labelCodigoUnico" >Este código ya está ocupado</label>
 				</p>
 				<p><label for="descripcion">Descripción</label>
-					<textarea id="descripcion" name="descripcion" ></textarea>
+					<textarea id="descripcion" name="descripcion" ><?=(isset($dieta["dieta"]->descripcion))?$dieta["dieta"]->descripcion:""?></textarea>
 				</p>
 				</div>
 				<div class="span6">
@@ -84,7 +85,7 @@
 					</tbody>
 					</table>
 					<p><button type="button" class="btn btn-primary" id="guardarDieta" name="guardarDieta">Guardar</button></p>
-					<input type="hidden" name="iddieta" id="iddieta" value="0" />
+					<input type="hidden" name="iddieta" id="iddieta" value="<?=(isset($dieta["dieta"]->iddieta))?$dieta["dieta"]->iddieta:0?>" />
 				</div>
 			</div>
 </div>

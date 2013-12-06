@@ -195,12 +195,16 @@ class Admin extends CI_Controller {
 
 
 	public function catalogoDietas(){
+		error_reporting(-1);
 		$this->load->model("dietamodel");
 		$this->load->model("grupomodel");
 		$this->load->model("perfilmodel");
 		$this->load->model("horariomodel");
 		$this->load->model("usuariomodel");
-
+		$data["dieta"] = array();
+		if ( $this->uri->segment(3) > 0 ){
+			$data["dieta"] = $this->dietamodel->getDieta($this->uri->segment(3));
+		}
 		$data["grupos"] = $this->grupomodel->getGrupos();
 		$data["perfiles"] = $this->perfilmodel->getPerfiles();
 		$data["horarios"] = $this->horariomodel->getHorarios();
@@ -240,13 +244,12 @@ class Admin extends CI_Controller {
 		
 		if($dieta->iddieta == 0){
 			$nueva_dieta = array("nombre"=>$dieta->nombre,"codigo"=>$dieta->codigo,"descripcion"=>$dieta->descripcion);
-			var_dump($nueva_dieta);die();
 			$this->db->insert("dieta",$nueva_dieta);
 			$iddieta = $this->db->insert_id();
-			if(sizeof($dieta->usuarios)>0){
+			if(sizeof($dieta->usuarios)>0 && is_array($dieta->usuarios)){
 				foreach($dieta->usuarios as $usuario){
 					$usuario_has_dieta = array("usuario_idusuario"=>$usuario,"dieta_iddieta"=>$iddieta);
-					$this->db->insert("usuario_has_dieta",$nueva_dieta);
+					$this->db->insert("usuario_has_dieta",$usuario_has_dieta);
 				}
 			} else if(sizeof($dieta->perfiles)>0){
 				foreach($dieta->perfiles as $c=>$perfil){
@@ -258,21 +261,27 @@ class Admin extends CI_Controller {
 				            );
 							$this->db->where('perfil_idperfil', $c);
 							$this->db->update('perfil_has_dieta', $data); 
-							$perfil = true;
+							$perfil->principal = true;
 						}
 						$data = array('perfil_idperfil'=>$c,
 										'dieta_iddieta'=>$iddieta,
 										'default'=>$perfil->principal);
-						$this->db->insert('perfil_has_dieta');
-						
-
+						$this->db->insert('perfil_has_dieta',$data);
 					}
-					$perfil_has_dieta = array();
+				}
+			}
+			if(sizeof($dieta->horario_grupo)>0){
+				foreach($dieta->horario_grupo as $c=>$horario_grupo){
+					$data = array('dieta_iddieta'=>$iddieta,
+								'grupo_idgrupo'=>$horario_grupo->idgrupo,
+								'horario_idhorario'=>$horario_grupo->idhorario,
+								'porciones'=>$horario_grupo->valor);
+					$this->db->insert('dieta_has_grupo',$data);	
 				}
 			}
 		}
-
-		echo json_encode($dieta);
+		$response = array("response"=>"ok");
+		echo json_encode($response);
 	}
 
 	public function editaGrupos(){
