@@ -28,29 +28,46 @@
 					<textarea id="descripcion" name="descripcion" ><?=(isset($dieta["dieta"]->descripcion))?$dieta["dieta"]->descripcion:""?></textarea>
 				</p>
 				</div>
-				<div class="span6">
+				<div class="span6"><?php echo "<pre>";var_dump($dieta);echo "</pre>"; ?>
 					<p>
 						<input type="radio" id="tipoDietaPerfiles" class="tipoDieta" name="tipoDieta" value="perfiles" checked="checked"> Perfiles - 
 						<input type="radio" id="tipoDietaUsuario" class="tipoDieta" name="tipoDieta" value="usuarios">Usuarios</p>
-					<div id="div-usuarios" style="display:none">
+					<div id="div-usuarios" <?=(@sizeof($dieta["usuario_has_dieta"])>0)? "":'style="display:none"'?>>
 						<select multiple id="usuarios" name="usuarios">
 						<?php 
 						foreach($usuarios as $usuario){ ?>
-							<option value="<?=$usuario->idusuario?>"><?=$usuario->nombre." ".$usuario->apellido?></option>
+							<option value="<?=$usuario->idusuario?>" <?=(isset($dieta["usuario_has_dieta"][$usuario->idusuario]))?" selected='selected' ":""?>><?=$usuario->nombre." ".$usuario->apellido?></option>
 						<?php } ?>
 						</select>
 					</div>
-					<div id="div-perfiles">
+					<div id="div-perfiles" <?php
+					if(@sizeof($dieta["perfil_has_dieta"])>0){
+						echo "";
+					}else if(sizeof($dieta)==0){
+						echo "";
+					}else{
+						echo 'style="display:none"';	
+					}
+					?>
+					>
 					<?php foreach($perfiles as $perfil){ ?>
 							<div class="checkbox">
 						        <label>
-						          <input type='checkbox' class='checkbox checkbox-perfil' name='perfil-<?=$perfil->idperfil?>' idperfil='<?=$perfil->idperfil?>' id='perfil-<?=$perfil->idperfil?>'/>
+						          <input type='checkbox' class='checkbox checkbox-perfil' 
+						          name='perfil-<?=$perfil->idperfil?>' 
+						          idperfil='<?=$perfil->idperfil?>' 
+						          id='perfil-<?=$perfil->idperfil?>'
+						          <?=(isset($dieta["perfil_has_dieta"][$perfil->idperfil]))?"checked='checked'":""?> />
 						          <?=$perfil->nombre?>
 						          
 						        </label>
 						        	<span style="display:block;margin-left:20px">
 							          Principal
-	  						          <input type='checkbox' class='checkbox-perfil-principal' disabled="disabled" name='principal-<?=$perfil->idperfil?>' id='principal-<?=$perfil->idperfil?>'/>
+	  						          <input type='checkbox' class='checkbox-perfil-principal' 
+	  						          name='principal-<?=$perfil->idperfil?>' 
+	  						          id='principal-<?=$perfil->idperfil?>'
+	  						          <?=(isset($dieta["perfil_has_dieta"][$perfil->idperfil]->default) && $dieta["perfil_has_dieta"][$perfil->idperfil]->default == true)?" checked='checked' ":"" ?> 
+	  						          />
   						          </span>
 						      </div>
 					<?php } ?>
