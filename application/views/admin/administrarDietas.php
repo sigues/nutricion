@@ -28,11 +28,21 @@
 					<textarea id="descripcion" name="descripcion" ><?=(isset($dieta["dieta"]->descripcion))?$dieta["dieta"]->descripcion:""?></textarea>
 				</p>
 				</div>
-				<div class="span6"><?php echo "<pre>";var_dump($dieta);echo "</pre>"; ?>
-					<p>
-						<input type="radio" id="tipoDietaPerfiles" class="tipoDieta" name="tipoDieta" value="perfiles" checked="checked"> Perfiles - 
-						<input type="radio" id="tipoDietaUsuario" class="tipoDieta" name="tipoDieta" value="usuarios">Usuarios</p>
-					<div id="div-usuarios" <?=(@sizeof($dieta["usuario_has_dieta"])>0)? "":'style="display:none"'?>>
+				<div class="span6"><?php //echo "<pre>";var_dump($dieta);echo "</pre>"; ?>
+					
+<pre>
+<input type="checkbox" id="tipoDietaUsuario" class="tipoDieta" name="tipoDieta" value="usuarios" <?=(@sizeof($dieta["usuario_has_dieta"])>0)?"checked='checked'":""?>> Usuarios
+</pre>
+					<div id="div-usuarios" <?php
+					if(@sizeof($dieta["usuario_has_dieta"])>0){
+						echo "";
+					}else if(sizeof($dieta)==0){
+						echo 'style="display:none"';
+					}else{
+						echo 'style="display:none"';	
+					}
+					?>
+					>
 						<select multiple id="usuarios" name="usuarios">
 						<?php 
 						foreach($usuarios as $usuario){ ?>
@@ -40,11 +50,14 @@
 						<?php } ?>
 						</select>
 					</div>
+<pre>
+<input type="checkbox" id="tipoDietaPerfiles" class="tipoDieta" name="tipoDieta" value="perfiles" <?=(@sizeof($dieta["perfil_has_dieta"])>0)?"checked='checked'":""?>> Perfiles
+</pre>
 					<div id="div-perfiles" <?php
 					if(@sizeof($dieta["perfil_has_dieta"])>0){
 						echo "";
 					}else if(sizeof($dieta)==0){
-						echo "";
+						echo 'style="display:none"';
 					}else{
 						echo 'style="display:none"';	
 					}
@@ -91,18 +104,31 @@
 					<tbody>
 					<?php
 					foreach($grupos as $grupo){
-						echo "<tr><td><input type='text' class='input-mini' id='total-grupo-".$grupo->idgrupo."' idgrupo='".$grupo->idgrupo."' readonly /></td>
-								<td>".$grupo->nombre."</td>";
+						$tr="";
+						$sumValue = 0;
 						foreach($horarios as $horario){
-							echo "<td><input type='text' class='input-mini horario-grupo horario-grupo-".$grupo->idgrupo."' idgrupo='".$grupo->idgrupo."' idhorario='".$horario->idhorario."' id='".$grupo->idgrupo.'-'.$horario->idhorario."' /></td>";
+							$value = (isset($dieta["dieta_has_grupo"][$grupo->idgrupo.'-'.$horario->idhorario]->porciones))?$dieta["dieta_has_grupo"][$grupo->idgrupo.'-'.$horario->idhorario]->porciones:"";
+							$sumValue += $value;
+							$tr .= "<td><input type='text' class='input-mini horario-grupo horario-grupo-".$grupo->idgrupo."' 
+							idgrupo='".$grupo->idgrupo."' idhorario='".$horario->idhorario."' 
+							id='".$grupo->idgrupo.'-'.$horario->idhorario."' value='".$value."' /></td>";
 						}
+						
+						echo "<tr><td><input type='text' class='input-mini' 
+							id='total-grupo-".$grupo->idgrupo."' idgrupo='".$grupo->idgrupo."' readonly value='".$sumValue."' /></td>
+							<td>".$grupo->nombre."</td>".$tr;
+						
 						echo "</tr>";
 					}
 					?>
 					</tbody>
 					</table>
-					<p><button type="button" class="btn btn-primary" id="guardarDieta" name="guardarDieta">Guardar</button></p>
+					<p>
+					<button type="button" class="btn btn-primary" id="guardarDieta" name="guardarDieta">Guardar</button> 
+					<button type="button" class="btn" id="cancelarDieta" name="cancelarDieta" <?=(!isset($dieta["dieta"]->iddieta))?"style='display:none'":""?>>Cancelar</button>
+					</p>
 					<input type="hidden" name="iddieta" id="iddieta" value="<?=(isset($dieta["dieta"]->iddieta))?$dieta["dieta"]->iddieta:0?>" />
+					<input type="hidden" name="site_url" id="site_url" value="<?=site_url()?>" />
 				</div>
 			</div>
 </div>

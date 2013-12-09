@@ -62,7 +62,7 @@ class Dietamodel extends CI_Model {
         $query = $this->db->get_where("dieta_has_grupo", array("dieta_iddieta"=>$iddieta));
         $response = array();
         foreach($query->result() as $row){
-            $response[$row->grupo_idgrupo] = $row;
+            $response[$row->grupo_idgrupo."-".$row->horario_idhorario] = $row;
         }
         return $response;
     }

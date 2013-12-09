@@ -52,16 +52,24 @@ $(document).ready(function(){
 	});
 
 	$(".tipoDieta").change(function(){
-		var tipoDieta = $('input:radio[name=tipoDieta]:checked').val();
-		if(tipoDieta == "usuarios"){
-			$("#div-usuarios").show();
-			$("#div-perfiles").hide();
-		} else if (tipoDieta == "perfiles"){
-			$("#div-usuarios").hide();
+
+		if($("#tipoDietaPerfiles").is(":checked")){
 			$("#div-perfiles").show();
+		} else {
+			$("#div-perfiles").hide();
+		}
+
+		if($("#tipoDietaUsuario").is(":checked")){
+			$("#div-usuarios").show();
+		} else {
+			$("#div-usuarios").hide();
 		}
 
 
+	});
+
+	$("#cancelarDieta").click(function(){
+		window.location.href = $("#site_url").val()+"/admin/catalogoDietas";
 	});
 
 });
@@ -90,7 +98,9 @@ function guardaDieta(){
 				perfiles[idperfil]["principal"] = false;
 			}
 		});
-	} else if($("#div-usuarios").is(":visible")){
+	} 
+
+	if($("#div-usuarios").is(":visible")){
 		usuarios = $("#usuarios").val();
 	}
 		
@@ -115,17 +125,19 @@ function guardaDieta(){
 			dataType: "json",
 			data: { 
 				dieta: JSON.stringify(dieta)
-			}/*,
+			},
 			success: function(response) {
 				console.log(response);
-				if(response.valid == "true"){
-					alert("felicidades");
-					$("#labelCodigoUnico").hide();
-					guardaDieta();
+
+				if(response.response == "ok"){
+					alert("Se ha guardado la dieta");
+					location.reload();
+					//$("#labelCodigoUnico").hide();
+					//guardaDieta();
 				} else {
-					$("#labelCodigoUnico").show();
-				}*/
-			//}
+					//$("#labelCodigoUnico").show();
+				}
+			}
 		});
 	console.log(JSON.stringify(dieta));
 

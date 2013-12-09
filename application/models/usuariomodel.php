@@ -32,7 +32,11 @@ class Usuariomodel extends CI_Model {
         return $result->row_array();
     }
 
-    function getUsuarios(){
+    function getUsuarios($perfil=0){
+        if($perfil != 0){
+            $this->db->where("perfil",$perfil);
+        }
+
         $result = $this->db->get("usuario");
         $usuarios = array();
         foreach($result->result() as $usuario){

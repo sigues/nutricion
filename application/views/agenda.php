@@ -46,7 +46,7 @@
     <?=$scriptAjax?>
 </div>
 <div class="container marketing" id="nosotros">
-
+  <!--<input type="text" id="paciente" name="paciente" value="" />!-->
   <div class="row">
         <div class="span12">
           <br><br>

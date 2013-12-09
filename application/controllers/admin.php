@@ -251,7 +251,9 @@ class Admin extends CI_Controller {
 					$usuario_has_dieta = array("usuario_idusuario"=>$usuario,"dieta_iddieta"=>$iddieta);
 					$this->db->insert("usuario_has_dieta",$usuario_has_dieta);
 				}
-			} else if(sizeof($dieta->perfiles)>0){
+			} 
+
+			if(sizeof($dieta->perfiles)>0){
 				foreach($dieta->perfiles as $c=>$perfil){
 					if($perfil->checked == true){
 						$principal = false;
@@ -338,6 +340,26 @@ class Admin extends CI_Controller {
         $data["seccion"]="personal";
         $this->load->view('template',$data);
 	}
+
+	public function agendarCita(){
+		$this->load->model("usuariomodel");
+		$data["fecha"]=$this->uri->segment(3);
+        $data["doctores"] = $this->usuariomodel->getUsuarios(2);
+        $data["procedimientos"] = array();//$this->db->get_where("procedimiento",array("activo"=>"si","tratamiento"=>false));
+        $this->load->view('ajax/agendarCita',$data);
+	}
+
+    public function buscaPaciente(){
+        $cadena = $this->uri->segment(3);//$_POST["cadena"];
+        $cadena = $_GET["term"];
+        if($cadena != ""){
+            $this->db->where("(nombre like '%$cadena%' OR apellido like '%$cadena%'
+                            OR concat(nombre,' ',apellido) LIKE '%$cadena%')");
+        }
+        $data["pacientes"] = $this->db->get("usuario");
+        $this->load->view("ajax/buscaPaciente",$data);
+    }
+
 
 }
 

@@ -42,7 +42,7 @@ $citasjs = substr($citasjs,0,-1);
 			],
                         eventClick: function(calEvent, jsEvent, view) {
                             //alert('Event: ' + calEvent.title+' - '+calEvent.paciente);
-                            $.colorbox({href:"<?=base_url()?>index.php/personal/verCita/"+calEvent.id});
+                            $.colorbox({href:"<?=base_url()?>index.php/admin/verCita/"+calEvent.id});
                             // change the border color just for fun
                             $(this).css('border-color', 'red');
 
@@ -53,7 +53,7 @@ $citasjs = substr($citasjs,0,-1);
 			    var m = fecha.getMonth()+1;
 			    var y = fecha.getFullYear();
 			    $.colorbox({
-                                href:"<?=base_url()?>index.php/personal/agendarCita/"+y+'-'+m+'-'+d,width:"630px",
+                                href:"<?=base_url()?>index.php/admin/agendarCita/"+y+'-'+m+'-'+d,width:"630px",
                                 onClosed : function(){
                                     $.ajax({
                                         type: "POST",
