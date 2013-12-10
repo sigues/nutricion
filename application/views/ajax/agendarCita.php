@@ -19,6 +19,7 @@
             </td>
             <td>
                 <input type="text" id="paciente" name="paciente" value="" />
+                <input type="hidden" id="usuario_idusuario" name="usuario_idusuario" value="" />
             </td>
         </tr>
         <tr class="frm-non">

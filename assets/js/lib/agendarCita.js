@@ -2,7 +2,7 @@
         $( "#paciente" ).autocomplete({
                 source:"buscaPaciente",
                 select: function( event, ui ) {
-                        console.log( ui );
+                            $("#usuario_idusuario").val( ui.item.valor );
                         }
         });
         var date = new Date();
@@ -67,9 +67,8 @@
                 });
         });
 
-/*
 
-        
+
         $(function() {
                 $( "#doctor" ).change(function() {
                     var fecha = $( "#fecha" ).val().replace(/\//g,"-");
@@ -78,16 +77,9 @@
                     $("#diaDoctor").html(respuesta);
                 });
         });
-        /*$(function() {
-                $( "#procedimiento" ).change(function() {
-                    var respuesta = pideAjax("costoSugerido/"+$( "#procedimiento" ).val());
-                    $("#costoSugerido").html(respuesta);
-                });
-        });*/
-       
 
 
-       /* $("#agendarCita").validate({
+        $("#agendarCita").validate({
         rules: {
                     paciente: {
                             required : true,
@@ -117,39 +109,36 @@
                             range : [0, 59],
                             digits : true
                     },
-                    procedimiento: {
-                            required: true
-                    },
                     costo: {
                             required: true,
                             number: true
                     }
                 },
         submitHandler: function(form) {
-            $('#respuesta').html("<center><img src='../../images/loading.gif' /></center>");
+            $('#respuesta').html("<center><img src='../../assets/images/loading.gif' /></center>");
             $.ajax({
               type: "POST",
               url: 'validaCita',
               dataType: "json",
               data: {
-                paciente : $("#paciente").val(),
-                tratamiento : $("#tratamiento").val(),
+                paciente : $("#usuario_idusuario").val(),
                 doctor : $("#doctor").val(),
                 fecha : $("#fecha").val(),
                 h_inicio : $("#h_inicio").val(),
                 m_inicio : $("#m_inicio").val(),
                 h_fin : $("#h_fin").val(),
                 m_fin : $("#m_fin").val(),
-                procedimiento : $("#procedimiento").val(),
                 costo : $("#costo").val(),
                 observaciones : $("#observaciones").val()
               },
               success: function(data) {
+
                   if(data.tipo == "error"){
                     for (var key in data) {
                         if (data.hasOwnProperty(key)) {
                             window.location = "#"+key+"_error";
                             $("#"+key+"_error").html(data[key]);
+                            alert(data[key]);
                         }
                     }
                     $('#respuesta').html("<center>No se pudo guardar la cita</center>");
@@ -159,7 +148,7 @@
               }
             });
           }
-    	});*/
+    	});
 });
 
 function actualizaHoras(horas){

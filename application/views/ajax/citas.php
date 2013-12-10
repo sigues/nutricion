@@ -1,5 +1,4 @@
 <?php 
-
 $citasjs="";
 foreach($citas as $cita){
     $fecha    = explode("-",$cita->fecha);
@@ -8,7 +7,7 @@ foreach($citas as $cita){
     
     $citasjs .= "{
                     id: ".$cita->idcita.",
-                    title: '".$cita->nombre." ".$cita->apellidoPaterno." ".$cita->apellidoMaterno."',
+                    title: '".$cita->nombre." ".$cita->apellido."',
                     start: new Date(".$fecha[0].",".($fecha[1]-1).",".$fecha[2].",".$horaInicio[0].",".$horaInicio[1]."),
                     end: new Date(".$fecha[0].",".($fecha[1]-1).",".$fecha[2].",".$horaFin[0].",".$horaFin[1]."),
                     allDay: false
