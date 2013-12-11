@@ -455,8 +455,8 @@ class Admin extends CI_Controller {
 
 
     public function agendaAjax(){
-        $idempleado = intval($_POST["personal"]);
-        $estado = (isset($_POST["estado"]))?$_POST["estado"]:"";
+        $idempleado = 0;// intval($_POST["personal"]);
+        $estado = "";//(isset($_POST["estado"]))?$_POST["estado"]:"";
         $this->db->select('cita.*');
         $this->db->select('cita.estado estado');
         $this->db->select('usuario.nombre, usuario.apellido');
@@ -509,7 +509,7 @@ class Admin extends CI_Controller {
         foreach($citas as $cita){
             $data["cita"] = $cita;
         }
-        $this->db->select("usuario.nombre nombrePaciente, paciente.*");
+        $this->db->select("usuario.nombre nombrePaciente, usuario.*");
         $paciente = $this->db->get_where("usuario",array("idusuario"=>$data["cita"]->usuario_idusuario));
         foreach($paciente->result() as $pac){
             $data["paciente"]=$pac;
