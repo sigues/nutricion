@@ -70,13 +70,22 @@ class Usuario extends CI_Controller {
 		$contrasena = md5(mysql_real_escape_string($this->input->post("contrasena")));
 
 		$this->load->model("usuariomodel");
+		$this->load->model("propiedad_usuariomodel");
 		$data["falloLogin"] = false;
 		$usuario = $this->usuariomodel->getUsuarioLogin($correo,$contrasena);
+
 		if(sizeof($usuario)>0){
+			$propiedad_usuario = $this->propiedad_usuariomodel->getPropiedad_usuarios($usuario["idusuario"]);
+			if(sizeof($propiedad_usuario)>0){
+				$tiene_propiedades = true;
+			} else {
+				$tiene_propiedades = false;
+			}
 				$newdata = array(
                    'correo'  => $usuario["correo"],
                    'perfil'	 => $usuario["perfil"],
-                   'is_logged' => true
+                   'is_logged' => true,
+                   'tiene_propiedades' => $tiene_propiedades
                );
 			$this->session->set_userdata($newdata);
 		} else {
@@ -95,6 +104,15 @@ class Usuario extends CI_Controller {
 		$data["contenido"] = $this->load->view('bootstrap',$data,true);
 		$this->load->view('template',$data);
 
+
+	}
+
+	public function datosPersonales(){
+		$this->load->model("propiedad_usuariomodel");
+		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades();
+		$this->load->view("usuario/datosPersonales",$data);
+
+		//var_dump($propiedades);
 
 	}
 

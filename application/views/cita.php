@@ -1,13 +1,11 @@
-<?php
- error_reporting(E_ALL);
-?>
 <link href="<?=base_url()?>assets/css/ui-lightness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 <script src="<?=base_url()?>assets/js/jquery-ui-1.10.3.custom.js"></script>
 <script>
         $(document).ready(function() {
             $("#cerrar_<?=$idcita?>").click( function(){
                 var selected = $("#tabs").tabs('option', 'selected');
-                $("#tabs").tabs("remove",selected);
+
+                $("#tabs").tabs("option","active",selected);
             });
             $("#guardaProducto_<?=$idcita?>").click(function(){
                 var idproducto = $("#productosActivos_<?=$idcita?>").val();

@@ -66,6 +66,7 @@
                           <li><a onclick="window.location='<?=site_url("admin/catalogoCategorias")?>'" href="<?=site_url("admin/catalogoCategorias")?>">Administrar categorias de recetas</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoHorarios")?>'" href="<?=site_url("admin/catalogoHorarios")?>">Administrar horarios</a></li>
                           <li><a onclick="window.location='<?=site_url("admin/catalogoPublicaciones")?>'" href="<?=site_url("admin/catalogoPublicaciones")?>">Administrar publicaciones</a></li>
+                          <li><a onclick="window.location='<?=site_url("admin/catalogoPropiedades_usuario")?>'" href="<?=site_url("admin/catalogoPropiedades_usuario")?>">Administrar propiedades de usuarios</a></li>
                         </ul>
                       </li>
                 <?php  }
@@ -74,6 +75,17 @@
                     <li><a href="<?=base_url()?>#productos">Productos</a></li>
                     <li><a href="<?=base_url()?>#contacto">Contacto</a></li>
                 <?php } ?>
+                <?php if($this->session->userdata("is_logged")==true && $this->session->userdata("tiene_propiedades")==false){
+    echo "<li><a class='datos_personales' href='".site_url()."/usuario/datosPersonales'>Llenar datos personales</a></li>"; ?>
+<script type='text/javascript'>
+  $(document).ready(function() {
+    $(".datos_personales").colorbox({open:true});
+
+  });
+
+</script>
+<?php    } ?>
+
               </ul>
               <?php if($this->session->userdata("is_logged")==false){ ?>
             	<form class="navbar-form pull-right form-inline " method="post" action="<?=site_url('usuario/iniciarSesion')?>">

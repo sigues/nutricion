@@ -1,6 +1,3 @@
-    <script src="<?=base_url()?>/assets/js/jquery.validate.js"></script>
-    <script src="<?=base_url()?>/assets/js/lib/registro.js"></script>
-    
 <div class="container marketing" id="nosotros">
 
 	<div class="row">

@@ -103,6 +103,9 @@ if(!isset($main)){ ?>
 	?>
     <script src="<?=base_url()?>assets/js/main.js"></script>
     <script src="<?=base_url()?>/assets/js/holder/holder.js"></script>
+    <link rel="stylesheet" href="<?=base_url()?>assets/css/colorbox.css" />
+    <script src="<?=base_url()?>assets/js/jquery.colorbox.js"></script>
+
     <input type="hidden" value="<?=base_url()?>" name="base_url" id="base_url" />
   </body>
 </html>

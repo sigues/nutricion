@@ -128,6 +128,31 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function catalogoPropiedades_usuario(){
+		try{
+			$crud = new grocery_CRUD();
+
+			$crud->set_theme('datatables');
+			$crud->set_table('propiedad_usuario');
+			$crud->set_subject('Propiedades de usuarios');
+			$crud->required_fields('nombre');
+			$crud->required_fields('tipo');
+			$crud->required_fields('codigo');
+			$crud->columns('idpropiedad_usuario','nombre','descripcion','codigo','tipo');
+
+			$output = $crud->render();
+			$output->titulo = "Propiedades de usuarios";
+			$output->subtitulo = "Aquí se podrán administrar las propiedades de los usuarios, como son: Peso, talla, cintura, etc.";
+
+			$data["contenido"] = $this->_example_output($output);
+
+			$this->load->view("template",$data);
+
+		}catch(Exception $e){
+			show_error($e->getMessage().' --- '.$e->getTraceAsString());
+		}
+	}
+
 	public function catalogoAlimentos(){
 		try{
 			$crud = new grocery_CRUD();

@@ -15,6 +15,9 @@
 	</script>
 
 
+<div class="container marketing" id="nosotros">
+
+        <div class="span12">
 
     <div id="tabs">
             <ul>
@@ -41,6 +44,12 @@
     }
     ?>
     </div>
+
+        </div>
+    </div>
+</div>
+
+
 <script>
     $("#accordion").accordion({ header: "h3" });
 </script>
