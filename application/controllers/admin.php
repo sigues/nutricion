@@ -455,8 +455,8 @@ class Admin extends CI_Controller {
 
 
     public function agendaAjax(){
-        $idempleado = intval($_POST["personal"]);
-        $estado = (isset($_POST["estado"]))?$_POST["estado"]:"";
+        $idempleado = 0;// intval($_POST["personal"]);
+        $estado = "";//(isset($_POST["estado"]))?$_POST["estado"]:"";
         $this->db->select('cita.*');
         $this->db->select('cita.estado estado');
         $this->db->select('usuario.nombre, usuario.apellido');
@@ -509,7 +509,7 @@ class Admin extends CI_Controller {
         foreach($citas as $cita){
             $data["cita"] = $cita;
         }
-        $this->db->select("usuario.nombre nombrePaciente, paciente.*");
+        $this->db->select("usuario.nombre nombrePaciente, usuario.*");
         $paciente = $this->db->get_where("usuario",array("idusuario"=>$data["cita"]->usuario_idusuario));
         foreach($paciente->result() as $pac){
             $data["paciente"]=$pac;
@@ -526,18 +526,17 @@ class Admin extends CI_Controller {
         $data["citas"] = $this->db->get()->result();
         $data["idpaciente"] = $data["paciente"]->idusuario;
 
-/*        
-        $this->db->select("producto.idproducto");
+        
+/*        $this->db->select("producto.idproducto");
         $this->db->select("producto.descripcion");
         $this->db->select("producto.nombre");
         $this->db->select("cita_has_producto.costo");
         $this->db->from("producto");
         $this->db->join("cita_has_producto","cita_has_producto.producto_idproducto = producto.idproducto ");
-        $this->db->where("cita_has_producto.cita_idcita",$data["idcita"]);
-*/
+        $this->db->where("cita_has_producto.cita_idcita",$data["idcita"]);*/
         $data["productos"] = array();//$this->db->get()->result();
 
-//        $data["productosActivos"] = $this->db->get_where("producto",array("activo"=>"si"))->result();
+        $data["productosActivos"] = array();//$this->db->get_where("producto",array("activo"=>"si"))->result();
 
         /* valores enum de estado */
         $row = $this->db->query("SHOW COLUMNS FROM cita LIKE 'estado'")->row()->Type;
@@ -559,17 +558,17 @@ class Admin extends CI_Controller {
             $enumsFinanciero[$value] = $value;
         }
 
-        $this->db->from("observacion");
+/*        $this->db->from("observacion");
         $this->db->join("empleado", "observacion.empleado_idempleado = empleado.idempleado");
-        $this->db->where("observacion.cita_idcita",$data["idcita"]);
-        $data["observaciones"] = $this->db->get()->result();
+        $this->db->where("observacion.cita_idcita",$data["idcita"]);*/
+        $data["observaciones"] = array();//$this->db->get()->result();
         $data["estados"] = $enums;
         $data["estadosFinancieros"] = $enumsFinanciero;
-        $data["titulo"][0]="Ficha del paciente Paciente Ejemplo";
-        $data["subtitulo"][0]="En la pestaña de Cita puede ver la cita actual y en la de expediente las citas anteriores e información sobre el paciente";
-        $data["contenido"][0] = $this->load->view('fichaPaciente',$data,TRUE);
+        $data["titulo"]="Ficha del paciente ".$data["paciente"]->nombre;
+        $data["subtitulo"]="En la pestaña de Cita puede ver la cita actual y en la de expediente las citas anteriores e información sobre el paciente";
+        $data["contenido"] = $this->load->view('fichaPaciente',$data,TRUE);
         $data["seccion"] = 'personal';
-        $this->load->view('template',$data);
+        echo $this->load->view('template',$data);
     }
 
 
