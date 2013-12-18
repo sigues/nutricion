@@ -138,7 +138,8 @@ class Admin extends CI_Controller {
 			$crud->required_fields('nombre');
 			$crud->required_fields('tipo');
 			$crud->required_fields('codigo');
-			$crud->columns('idpropiedad_usuario','nombre','descripcion','codigo','tipo');
+			$crud->required_fields('cuestionario');
+			$crud->columns('idpropiedad_usuario','nombre','descripcion','codigo','cuestionario','tipo');
 
 			$output = $crud->render();
 			$output->titulo = "Propiedades de usuarios";

@@ -100,6 +100,7 @@ class Usuario extends CI_Controller {
 
 	public function cerrarSesion(){
 		$this->session->set_userdata('is_logged',false);
+		$this->session->set_userdata('datos_personales_cerrado',false);
 		$data["main"] = true;
 		$data["contenido"] = $this->load->view('bootstrap',$data,true);
 		$this->load->view('template',$data);
@@ -111,9 +112,17 @@ class Usuario extends CI_Controller {
 		$this->load->model("propiedad_usuariomodel");
 		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades();
 		$this->load->view("usuario/datosPersonales",$data);
+	}
 
-		//var_dump($propiedades);
+	public function guardaDatosPersonales(){
+		var_dump($_POST);
+		//$datos = unserialize($_POST["datos"]);
+		//var_dump($datos);
+	}
 
+	public function cierraDatosPersonales(){
+		$this->session->set_userdata('datos_personales_cerrado',true);
+		echo json_encode(array("ok"=>"ok"));
 	}
 
 }

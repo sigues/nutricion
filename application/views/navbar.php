@@ -76,16 +76,26 @@
                     <li><a href="<?=base_url()?>#contacto">Contacto</a></li>
                 <?php } ?>
                 <?php if($this->session->userdata("is_logged")==true && $this->session->userdata("tiene_propiedades")==false){
-    echo "<li><a class='datos_personales' href='".site_url()."/usuario/datosPersonales'>Llenar datos personales</a></li>"; ?>
+    echo "<li><a class='datos_personales' rel='colorbox' href='".site_url()."/usuario/datosPersonales'>Llenar datos personales</a></li>"; ?>
 <script type='text/javascript'>
   $(document).ready(function() {
-    $(".datos_personales").colorbox({open:true});
-
+    $(".datos_personales").colorbox({
+      rel:'datos_personales',
+      <?=(!$this->session->userdata('datos_personales_cerrado') && $this->session->userdata('datos_personales_cerrado') != true)?"open:true,":""?>
+      onClosed:function(){ 
+          $.ajax({
+              url: $("#base_url").val()+"index.php/usuario/cierraDatosPersonales",
+              type: "post",
+              data:{
+                  estado:true
+              }
+          });
+      }
+    });
   });
-
 </script>
-<?php    } ?>
-
+<?php } ?>
+                <li style="display:none"><a class='datos_personales' rel='colorbox' href='<?=site_url()?>/usuario/historiaNutricion'>Historia nutricional</a></li>
               </ul>
               <?php if($this->session->userdata("is_logged")==false){ ?>
             	<form class="navbar-form pull-right form-inline " method="post" action="<?=site_url('usuario/iniciarSesion')?>">
