@@ -116,7 +116,6 @@ class Usuario extends CI_Controller {
 	}
 
 	public function guardaDatosPersonales(){
-		var_dump($_POST);
 		$this->load->model("usuario_has_propiedad_usuario");
 		$datos = $_POST["datos"];
 		foreach($datos as $c=>$dato){
@@ -125,12 +124,10 @@ class Usuario extends CI_Controller {
 				$this->usuario_has_propiedad_usuario->idpropiedad_usuario = $dato["idpropiedad_usuario"];
 				$this->usuario_has_propiedad_usuario->valor = $dato["valor"];
 				$this->usuario_has_propiedad_usuario->guardar();
-
 			}
 		}
-
-		//$datos = unserialize($_POST["datos"]);
-		//var_dump($datos);
+		$val = array("value"=>"ok");
+		echo json_encode($val);
 	}
 
 	public function cierraDatosPersonales(){

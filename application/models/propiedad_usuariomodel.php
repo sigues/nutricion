@@ -58,6 +58,7 @@ class Propiedad_usuariomodel extends CI_Model {
         if($usuario != null){
             $propiedades = array("usuario_has_propiedad_usuario.usuario_idusuario"=>$usuario);
         }
+        $this->db->group_by("idpropiedad_usuario");
         $res = $this->db->get();
         $propiedades_usuario = array();
         foreach($res->result() as $row){
