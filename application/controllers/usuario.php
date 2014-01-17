@@ -82,6 +82,7 @@ class Usuario extends CI_Controller {
 				$tiene_propiedades = false;
 			}
 				$newdata = array(
+				   'idusuario' => $usuario["idusuario"],
                    'correo'  => $usuario["correo"],
                    'perfil'	 => $usuario["perfil"],
                    'is_logged' => true,
@@ -110,12 +111,24 @@ class Usuario extends CI_Controller {
 
 	public function datosPersonales(){
 		$this->load->model("propiedad_usuariomodel");
-		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades();
+		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades("registro",$this->session->userdata("idusuario"));
 		$this->load->view("usuario/datosPersonales",$data);
 	}
 
 	public function guardaDatosPersonales(){
 		var_dump($_POST);
+		$this->load->model("usuario_has_propiedad_usuario");
+		$datos = $_POST["datos"];
+		foreach($datos as $c=>$dato){
+			if(is_numeric($c)){
+				$this->usuario_has_propiedad_usuario->usuario_idusuario = $this->session->userdata('idusuario');
+				$this->usuario_has_propiedad_usuario->idpropiedad_usuario = $dato["idpropiedad_usuario"];
+				$this->usuario_has_propiedad_usuario->valor = $dato["valor"];
+				$this->usuario_has_propiedad_usuario->guardar();
+
+			}
+		}
+
 		//$datos = unserialize($_POST["datos"]);
 		//var_dump($datos);
 	}

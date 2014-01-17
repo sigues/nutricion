@@ -1,30 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Propiedad_usuariomodel extends CI_Model {
-
-    var $idusuario = '';
-    var $correo = '';
-    var $contrasena = '';
-    var $nombre = '';
-    var $apellido = '';
-    var $sexo = '';
-    var $fechaNacimiento = '';
-    var $perfil = '';
-    var $ciudad_idciudad = '';
+class Usuario_has_propiedad_usuario extends CI_Model {
+	var $usuario_idusuario;
+	var $idpropiedad_usuario;
+	var $valor;
 
     function __construct()
     {
         parent::__construct();
     }
 
-    function registroUsuario(){
-    	$datos = array("correo"=>$this->correo,
-                        "nombre"=>$this->nombre,
-                        "apellido"=>$this->apellido,
-                        "perfil"=>$this->perfil,
-                        "contrasena"=>md5($this->contrasena));
-        $usuario = $this->db->insert("usuario",$datos);
-        return $usuario;
+    function guardar(){
+    	$datos = array("usuario_idusuario"=>$this->usuario_idusuario,
+                        "propiedad_usuario_idpropiedad_usuario"=>$this->idpropiedad_usuario,
+                        "valor"=>$this->valor);
+        $valor = $this->db->insert("usuario_has_propiedad_usuario",$datos);
+        return $valor;
     }
 
     function getPropiedad_usuarios($idusuario){

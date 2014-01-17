@@ -26,4 +26,11 @@ $(document).ready(function(){
             }
         });
 	});
+
+	$("#form_datosPersonales").validate({
+		submitHandler: function(form) {
+			//form.submit();
+			alert("huevos");
+		}
+		});
 });

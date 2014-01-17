@@ -128,3 +128,4 @@
 
       </div> <!-- /.container -->
     </div><!-- /.navbar-wrapper -->
+<script src="<?=base_url()?>assets/js/jquery.validate.js"></script>
