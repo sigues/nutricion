@@ -71,6 +71,8 @@ class Usuario extends CI_Controller {
 
 		$this->load->model("usuariomodel");
 		$this->load->model("propiedad_usuariomodel");
+		$this->load->model("preguntamodel");
+
 		$data["falloLogin"] = false;
 		$usuario = $this->usuariomodel->getUsuarioLogin($correo,$contrasena);
 
@@ -81,12 +83,20 @@ class Usuario extends CI_Controller {
 			} else {
 				$tiene_propiedades = false;
 			}
+
+			$preguntasHistorial = $this->preguntamodel->estadoPreguntas("historial",$usuario["idusuario"]);
+			$tiene_historial = true;
+			if($preguntasHistorial == false){
+				$tiene_historial = false;
+			}
+
 				$newdata = array(
 				   'idusuario' => $usuario["idusuario"],
                    'correo'  => $usuario["correo"],
                    'perfil'	 => $usuario["perfil"],
                    'is_logged' => true,
-                   'tiene_propiedades' => $tiene_propiedades
+                   'tiene_propiedades' => $tiene_propiedades,
+                   'tiene_historial' => $tiene_historial
                );
 			$this->session->set_userdata($newdata);
 		} else {
@@ -114,6 +124,13 @@ class Usuario extends CI_Controller {
 		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades("registro",$this->session->userdata("idusuario"));
 		$this->load->view("usuario/datosPersonales",$data);
 	}
+
+	public function historiaNutricion(){
+		$this->load->model("preguntamodel");
+		$preguntas = $this->preguntamodel->getPreguntasCuestionario("historial",$this->session->userdata("idusuario"));
+		var_dump($preguntas);
+	}
+
 
 	public function guardaDatosPersonales(){
 		$this->load->model("usuario_has_propiedad_usuario");

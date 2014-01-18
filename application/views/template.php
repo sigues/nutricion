@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php if(!$this->session->userdata("is_logged") != null ){
+<?php 
+if(!$this->session->userdata("is_logged") != null ){
 		$this->session->set_userdata("is_logged",false);
 	} 
 	?>
