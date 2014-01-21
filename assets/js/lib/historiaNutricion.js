@@ -1,17 +1,20 @@
 $(document).ready(function(){
-	$("#guardarDatos").click(function(){
+	$("#guardarHistoria").click(function(){
 		var datos = {};
 		var x=0;
-		$("form#form_datosPersonales :input").each(function(){
-			var idpropiedad_usuario = $(this).attr("idpropiedad_usuario");
-		 	var valor = $(this).val(); // This is the jquery object of the input, do what you will
-		 	datos[idpropiedad_usuario] = {};
-		 	datos[idpropiedad_usuario]["idpropiedad_usuario"] = idpropiedad_usuario;
-		 	datos[idpropiedad_usuario]["valor"] = valor;
+		var tipo_pregunta = "";
+		$("form#historiaNutricion :input").each(function(){
+			tipo_pregunta = $(this).attr("tipo_pregunta");
+
+			if(tipo_pregunta == "radio" || tipo_pregunta == "checkbox" ){
+
+				datos[this.id] = $( this ).prop( "checked" );
+			}
 		});
+		console.log(datos);
 
 		$.ajax({
-            url: $("#base_url").val()+"index.php/usuario/guardaDatosPersonales",
+            url: $("#base_url").val()+"index.php/usuario/guardaHistorial",
             type: "post",
             dataType: "json",
             data:{
@@ -29,8 +32,8 @@ $(document).ready(function(){
 
 	$("#form_datosPersonales").validate({
 		submitHandler: function(form) {
-			//form.submit();
-			alert("huevos");
+			form.submit();
+			//alert("huevos");
 		}
 		});
 });

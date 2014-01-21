@@ -1,5 +1,5 @@
 <script src="<?=base_url()?>assets/js/lib/historiaNutricion.js"></script>
-<form id="historiaNutricion">
+<form id="historiaNutricion" onsubmit="return false;">
 
 <?php
 
@@ -12,11 +12,11 @@ foreach($preguntas as $pregunta){
 		<?php 
 		$pregAnterior = $pregunta->idpregunta;
 	}
-	if($pregunta->tipo == "radio"){?>
-		<input type="radio" name="<?=$pregunta->idpregunta?>" value="<?=$pregunta->idrespuesta?>" />
+	if($pregunta->tipo == "radio"){ ?>
+		<input type="radio" tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idpregunta?>" value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
 		<?php 
-	} else if($pregunta->tipo == "checkbox"){?>
-		<input type="checkbox" name="<?=$pregunta->idrespuesta?>" value="<?=$pregunta->idrespuesta?>" />
+	} else if($pregunta->tipo == "checkbox"){ ?>
+		<input type="checkbox" tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idrespuesta?>" value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
 		<?php
 	}
 	echo $pregunta->nombreRespuesta."<br>";
@@ -25,5 +25,5 @@ foreach($preguntas as $pregunta){
 
 ?>
 <br>
-<button id="guardarHistoria">Guardar</button>
+<button id="guardarHistoria" class="btn btn-medium btn-primary">Guardar</button>
 </form>

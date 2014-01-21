@@ -148,6 +148,21 @@ class Usuario extends CI_Controller {
 		echo json_encode($val);
 	}
 
+	public function guardaHistorial(){
+		$this->load->model("preguntamodel");
+		$datos = $_POST["datos"];
+		foreach($datos as $c=>$dato){
+			if(is_numeric($c)){
+				$this->preguntamodel->usuario_idusuario = $this->session->userdata('idusuario');
+				$this->usuario_has_propiedad_usuario->idpropiedad_usuario = $dato["idpropiedad_usuario"];
+				$this->usuario_has_propiedad_usuario->valor = $dato["valor"];
+				$this->usuario_has_propiedad_usuario->guardar();
+			}
+		}
+		$val = array("value"=>"ok");
+		echo json_encode($val);
+	}
+
 	public function cierraDatosPersonales(){
 		$this->session->set_userdata('datos_personales_cerrado',true);
 		echo json_encode(array("ok"=>"ok"));
