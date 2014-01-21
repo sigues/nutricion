@@ -1,4 +1,6 @@
 <script src="<?=base_url()?>assets/js/lib/historiaNutricion.js"></script>
+<div style="width:400px">
+	<span class="title"><h2>Historia Nutricional</h2></span>
 <form id="historiaNutricion" onsubmit="return false;">
 
 <?php
@@ -13,10 +15,16 @@ foreach($preguntas as $pregunta){
 		$pregAnterior = $pregunta->idpregunta;
 	}
 	if($pregunta->tipo == "radio"){ ?>
-		<input type="radio" tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idpregunta?>" value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
+		<input type="radio" idpregunta="<?=$pregunta->idpregunta?>" 
+		tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idpregunta?>" 
+		<?=($pregunta->valor=="true")?"checked=checked":""?>
+		value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
 		<?php 
 	} else if($pregunta->tipo == "checkbox"){ ?>
-		<input type="checkbox" tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idrespuesta?>" value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
+		<input type="checkbox" idpregunta="<?=$pregunta->idpregunta?>" 
+		tipo_pregunta="<?=$pregunta->tipo?>" name="<?=$pregunta->idrespuesta?>" 
+		<?=($pregunta->valor=="true")?"checked=checked":""?>
+		value="<?=$pregunta->idrespuesta?>" id="<?=$pregunta->idrespuesta?>" />
 		<?php
 	}
 	echo $pregunta->nombreRespuesta."<br>";
@@ -27,3 +35,4 @@ foreach($preguntas as $pregunta){
 <br>
 <button id="guardarHistoria" class="btn btn-medium btn-primary">Guardar</button>
 </form>
+</div>

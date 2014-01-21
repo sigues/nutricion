@@ -104,9 +104,9 @@
               </ul>
               <?php if($this->session->userdata("is_logged")==false){ ?>
             	<form class="navbar-form pull-right form-inline " method="post" action="<?=site_url('usuario/iniciarSesion')?>">
-	                <input class="span2 input-small" type="text" placeholder="Correo" name="correo">
+	                <!--<input class="span2 input-small" type="text" placeholder="Correo" name="correo">
 	                <input class="span2 input-small" type="password" placeholder="Contraseña" name="contrasena">
-	                <input type="hidden" name="iniciarSesion" id="iniciarSesion" value="true">
+	                <input type="hidden" name="iniciarSesion" id="iniciarSesion" value="true">!-->
 
 	                <button type="submit" class="btn btn-small">Iniciar Sesión</button>
 	                <button type="submit" class="btn btn-info btn-small" id="btn-registro" url="<?=site_url('usuario/registro')?>">Registro</button>

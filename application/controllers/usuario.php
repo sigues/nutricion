@@ -69,43 +69,51 @@ class Usuario extends CI_Controller {
 		$correo = mysql_real_escape_string($this->input->post("correo"));
 		$contrasena = md5(mysql_real_escape_string($this->input->post("contrasena")));
 
-		$this->load->model("usuariomodel");
-		$this->load->model("propiedad_usuariomodel");
-		$this->load->model("preguntamodel");
+		if(isset($correo) && isset($contrasena) && $contrasena != "" && $correo != ""){
+			$this->load->model("usuariomodel");
+			$this->load->model("propiedad_usuariomodel");
+			$this->load->model("preguntamodel");
 
-		$data["falloLogin"] = false;
-		$usuario = $this->usuariomodel->getUsuarioLogin($correo,$contrasena);
+			$data["falloLogin"] = false;
+			$usuario = $this->usuariomodel->getUsuarioLogin($correo,$contrasena);
 
-		if(sizeof($usuario)>0){
-			$propiedad_usuario = $this->propiedad_usuariomodel->getPropiedad_usuarios($usuario["idusuario"]);
-			if(sizeof($propiedad_usuario)>0){
-				$tiene_propiedades = true;
+			if(sizeof($usuario)>0){
+				$propiedad_usuario = $this->propiedad_usuariomodel->getPropiedad_usuarios($usuario["idusuario"]);
+				if(sizeof($propiedad_usuario)>0){
+					$tiene_propiedades = true;
+				} else {
+					$tiene_propiedades = false;
+				}
+
+				$preguntasHistorial = $this->preguntamodel->estadoPreguntas("historial",$usuario["idusuario"]);
+				$tiene_historial = true;
+				if($preguntasHistorial == false){
+					$tiene_historial = false;
+				}
+
+					$newdata = array(
+					   'idusuario' => $usuario["idusuario"],
+	                   'correo'  => $usuario["correo"],
+	                   'perfil'	 => $usuario["perfil"],
+	                   'is_logged' => true,
+	                   'tiene_propiedades' => $tiene_propiedades,
+	                   'tiene_historial' => $tiene_historial
+	               );
+				$this->session->set_userdata($newdata);
 			} else {
-				$tiene_propiedades = false;
+				$data["falloLogin"] = true;
 			}
 
-			$preguntasHistorial = $this->preguntamodel->estadoPreguntas("historial",$usuario["idusuario"]);
-			$tiene_historial = true;
-			if($preguntasHistorial == false){
-				$tiene_historial = false;
-			}
+			$data["main"] = true;
+			$data["contenido"] = $this->load->view('bootstrap',$data,true);
+			$this->load->view('template',$data);
 
-				$newdata = array(
-				   'idusuario' => $usuario["idusuario"],
-                   'correo'  => $usuario["correo"],
-                   'perfil'	 => $usuario["perfil"],
-                   'is_logged' => true,
-                   'tiene_propiedades' => $tiene_propiedades,
-                   'tiene_historial' => $tiene_historial
-               );
-			$this->session->set_userdata($newdata);
-		} else {
-			$data["falloLogin"] = true;
+		}else{
+			$data = array();
+			$data["contenido"] = $this->load->view('login',$data,true);
+			$this->load->view('template',$data);
+
 		}
-
-		$data["main"] = true;
-		$data["contenido"] = $this->load->view('bootstrap',$data,true);
-		$this->load->view('template',$data);
 
 	}
 
@@ -128,6 +136,7 @@ class Usuario extends CI_Controller {
 	public function historiaNutricion(){
 		$this->load->model("preguntamodel");
 		$data["preguntas"] = $this->preguntamodel->getPreguntasCuestionario("historial",$this->session->userdata("idusuario"));
+		//var_dump($data["preguntas"]);
 		$this->load->view("usuario/historiaNutricion",$data);
 		
 	}
@@ -154,9 +163,15 @@ class Usuario extends CI_Controller {
 		foreach($datos as $c=>$dato){
 			if(is_numeric($c)){
 				$this->preguntamodel->usuario_idusuario = $this->session->userdata('idusuario');
-				$this->usuario_has_propiedad_usuario->idpropiedad_usuario = $dato["idpropiedad_usuario"];
-				$this->usuario_has_propiedad_usuario->valor = $dato["valor"];
-				$this->usuario_has_propiedad_usuario->guardar();
+				$this->preguntamodel->idpregunta = $dato["idpregunta"];
+				$this->preguntamodel->tipo_pregunta = $dato["tipo_pregunta"];
+				if($dato["tipo_pregunta"] == "radio" || $dato["tipo_pregunta"] == "checkbox"){
+					$this->preguntamodel->idrespuesta = $dato["id"];
+					$this->preguntamodel->valor = $dato["valor"];
+				}else{
+					$this->preguntamodel->valor = $dato["valor"];
+				}
+				$this->preguntamodel->guardarRespuestaPaciente();
 			}
 		}
 		$val = array("value"=>"ok");

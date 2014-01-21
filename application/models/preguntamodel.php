@@ -71,5 +71,19 @@ class Preguntamodel extends CI_Model {
         return $estado;
     }
 
+    public function guardarRespuestaPaciente(){
+        $data = array();
+        $data["usuario_idusuario"] = $this->usuario_idusuario;
+        $data["pregunta_idpregunta"] = $this->idpregunta;
+        $data["fecha"] = date("Y-m-d H:i:s");
+        if($this->tipo_pregunta == "checkbox" || $this->tipo_pregunta == "radio"){
+            $data["valor"] = $this->valor;
+            $data["respuesta_idrespuesta"] = $this->idrespuesta;
+        }else{
+            $data["valor"] = $this->valor;
+        }
+        $this->db->insert("usuario_has_respuesta",$data);
+    }
+
 
 }
