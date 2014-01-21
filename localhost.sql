@@ -3,17 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2014 at 06:26 PM
+-- Generation Time: Jan 20, 2014 at 06:40 PM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `nutricion`
@@ -84,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `cita` (
   `estadoFinanciero` enum('pendiente','en proceso','pagado') DEFAULT 'pendiente',
   PRIMARY KEY (`idcita`,`usuario_idusuario`),
   KEY `fk_cita_usuario1_idx` (`usuario_idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `cita`
@@ -92,7 +86,9 @@ CREATE TABLE IF NOT EXISTS `cita` (
 
 INSERT INTO `cita` (`idcita`, `horaInicio`, `horaFin`, `nutriologo`, `estado`, `usuario_idusuario`, `costo`, `comentario`, `fecha`, `estadoFinanciero`) VALUES
 (1, '09:30:00', '09:59:00', 1, 'pendiente', 1, 300, 'mis huevos', '2013-12-17', 'pendiente'),
-(2, '10:30:00', '10:59:00', 1, 'pendiente', 1, 300, '', '2013-12-17', 'pendiente');
+(2, '10:30:00', '10:59:00', 1, 'pendiente', 1, 300, '', '2013-12-17', 'pendiente'),
+(3, '10:00:00', '10:29:00', 1, 'pendiente', 2, 300, 'sdcsdcs', '2014-01-21', 'pendiente'),
+(4, '10:30:00', '10:59:00', 1, 'pendiente', 2, 300, 'dcscs', '2014-01-21', 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -605,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `respuesta` (
   `pregunta_idpregunta` int(11) NOT NULL,
   PRIMARY KEY (`idrespuesta`),
   KEY `fk_respuesta_pregunta1_idx` (`pregunta_idpregunta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `respuesta`
@@ -614,7 +610,13 @@ CREATE TABLE IF NOT EXISTS `respuesta` (
 INSERT INTO `respuesta` (`idrespuesta`, `nombre`, `pregunta_idpregunta`) VALUES
 (1, 'si', 1),
 (2, 'no', 1),
-(3, 'ocasionalmente', 1);
+(3, 'ocasionalmente', 1),
+(4, 'Lacteos', 2),
+(5, 'Cereales', 2),
+(6, 'Chocolate', 2),
+(7, 'Legumbres', 2),
+(8, 'Frutas', 2),
+(9, 'Precocinados', 2);
 
 -- --------------------------------------------------------
 

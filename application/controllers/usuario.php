@@ -127,8 +127,9 @@ class Usuario extends CI_Controller {
 
 	public function historiaNutricion(){
 		$this->load->model("preguntamodel");
-		$preguntas = $this->preguntamodel->getPreguntasCuestionario("historial",$this->session->userdata("idusuario"));
-		var_dump($preguntas);
+		$data["preguntas"] = $this->preguntamodel->getPreguntasCuestionario("historial",$this->session->userdata("idusuario"));
+		$this->load->view("usuario/historiaNutricion",$data);
+		
 	}
 
 
