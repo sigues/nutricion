@@ -18,8 +18,8 @@ $(document).ready(function(){
                 datos:datos
             },
             success: function( strData ){
-            	if(strData.valido==true){
-					$.colorbox.next();
+            	if(strData.value=="ok"){
+					$.fn.colorbox.close();
             	}else{
             		alert(strData.error);
             	}

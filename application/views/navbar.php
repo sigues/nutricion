@@ -18,7 +18,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="<?=base_url()?>">MeNut</a>
+            <a class="brand" href="<?=base_url()?>">NutInk</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
             <div class="nav-collapse collapse">
               <ul class="nav navbar-nav" id="top-nav">
@@ -26,7 +26,7 @@
                 	if(isset($main)){
                 		echo 'class="active"';
                 	}
-                ?>><a href="<?=base_url()?>">Inicio</a></li>
+                ?>><a href="<?=site_url()?>" onclick="window.location='<?=site_url()?>'" >Inicio</a></li>
 
 
                 <?php if($this->session->userdata("is_logged")==true){ ?>
@@ -50,7 +50,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a href="<?=base_url()?>#contacto">Publicaciones</a>
+                    <a href="<?=base_url()?>">Publicaciones</a>
                   </li>
                 <?php 
                     if($this->session->userdata('perfil')==2){ ?>

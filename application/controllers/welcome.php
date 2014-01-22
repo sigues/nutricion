@@ -13,8 +13,13 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-		$data["main"] = true;
-		$data["contenido"] = $this->load->view('bootstrap',$data,true);
+		$data=array();
+		if($this->session->userdata("is_logged") == true){
+			$data["contenido"] = $this->load->view('usuario/controlPanel',$data,true);
+		} else {
+			$data["main"] = true;
+			$data["contenido"] = $this->load->view('bootstrap',$data,true);
+		}
 		$this->load->view('template',$data);
 	}
 

@@ -48,15 +48,17 @@ class Propiedad_usuariomodel extends CI_Model {
     }
 
     function getPropiedades($cuestionario = null,$usuario=null){
+        $condicionUsuario="";
+        if($usuario != null){
+            $condicionUsuario = "AND (usuario_has_propiedad_usuario.usuario_idusuario = $usuario OR usuario_has_propiedad_usuario.usuario_idusuario = NULL) ";
+        }
+
         $this->db->select("propiedad_usuario.*,usuario_has_propiedad_usuario.valor respuesta");
         $this->db->from("propiedad_usuario");
-        $this->db->join("usuario_has_propiedad_usuario","propiedad_usuario.idpropiedad_usuario = usuario_has_propiedad_usuario.propiedad_usuario_idpropiedad_usuario","left");
+        $this->db->join("usuario_has_propiedad_usuario","propiedad_usuario.idpropiedad_usuario = usuario_has_propiedad_usuario.propiedad_usuario_idpropiedad_usuario $condicionUsuario","left");
         if($cuestionario != null){
             $propiedades = array("cuestionario"=>$cuestionario);
             $this->db->where($propiedades);
-        }
-        if($usuario != null){
-            $propiedades = array("usuario_has_propiedad_usuario.usuario_idusuario"=>$usuario);
         }
         $this->db->group_by("idpropiedad_usuario");
         $res = $this->db->get();

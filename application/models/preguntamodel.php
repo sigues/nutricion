@@ -18,16 +18,16 @@ class Preguntamodel extends CI_Model {
     }
 
     function getPreguntasCuestionario($codigo,$usuario=null){
+        $condicionUsuario = "";
+        if($usuario != null){
+            $condicionUsuario = " AND (usuario_has_respuesta.usuario_idusuario = $usuario OR usuario_has_respuesta.usuario_idusuario = null) ";
+        }
         $this->db->select("cuestionario.*, pregunta.*, respuesta.*, usuario_has_respuesta.*, cuestionario.nombre nombreCuestionario, pregunta.nombre nombrePregunta, respuesta.nombre nombreRespuesta");
         $this->db->from("respuesta");
         $this->db->join("pregunta","pregunta.idpregunta=respuesta.pregunta_idpregunta");
         $this->db->join("cuestionario","cuestionario.idcuestionario=pregunta.cuestionario_idcuestionario");
-        $this->db->join("usuario_has_respuesta","usuario_has_respuesta.respuesta_idrespuesta=respuesta.idrespuesta","left");
+        $this->db->join("usuario_has_respuesta","usuario_has_respuesta.respuesta_idrespuesta=respuesta.idrespuesta $condicionUsuario ","left");
         $this->db->where("cuestionario.codigo",$codigo);
-        if($usuario != null){
-            $this->db->where("usuario_has_respuesta.usuario_idusuario",$usuario);
-            $this->db->or_where("usuario_has_respuesta.usuario_idusuario",null);
-        }
 
         $result = $this->db->get();
 
@@ -41,18 +41,17 @@ class Preguntamodel extends CI_Model {
     }
 
     function estadoPreguntas($codigo,$usuario=null){
+        $condicionUsuario = "";
+        if($usuario != null){
+            $condicionUsuario = " AND (usuario_has_respuesta.usuario_idusuario = $usuario OR usuario_has_respuesta.usuario_idusuario = null) ";
+        }
         $this->db->select("cuestionario.*, pregunta.*, respuesta.*, usuario_has_respuesta.*, cuestionario.nombre nombreCuestionario, pregunta.nombre nombrePregunta, respuesta.nombre nombreRespuesta");
         $this->db->from("respuesta");
         $this->db->join("pregunta","pregunta.idpregunta=respuesta.pregunta_idpregunta");
         $this->db->join("cuestionario","cuestionario.idcuestionario=pregunta.cuestionario_idcuestionario");
-        $this->db->join("usuario_has_respuesta","usuario_has_respuesta.respuesta_idrespuesta=respuesta.idrespuesta","left");
+        $this->db->join("usuario_has_respuesta","usuario_has_respuesta.respuesta_idrespuesta=respuesta.idrespuesta $condicionUsuario ","left");
         $this->db->where("cuestionario.codigo",$codigo);
         $this->db->where("pregunta.obligatoria",true);
-        if($usuario != null){
-            $this->db->where("usuario_has_respuesta.usuario_idusuario",$usuario);
-            $this->db->or_where("usuario_has_respuesta.usuario_idusuario",null);
-
-        }
         $result = $this->db->get();
         $preguntas = array();
         $estado = true;

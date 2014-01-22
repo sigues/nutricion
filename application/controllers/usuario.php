@@ -35,12 +35,16 @@ class Usuario extends CI_Controller {
 			$this->usuariomodel->contrasena = $this->input->post("password");
 			$this->usuariomodel->perfil = 1;
 			$this->usuariomodel->registroUsuario();
+			$usuario = $this->usuariomodel->getUsuarioLogin($this->input->post("email"),md5($this->input->post("password")));
 
 			$newdata = array(
+				   'idusuario' => $usuario["idusuario"],
                    'nombre'  => $this->input->post("nombre"),
                    'correo'  => $this->input->post("correo"),
                    'perfil'	 => $this->input->post("email"),
-                   'is_logged' => TRUE
+                   'is_logged' => TRUE,
+                   'tiene_propiedades' => FALSE,
+                   'tiene_historial' => FALSE
                );
 			$this->session->set_userdata($newdata);
 
@@ -108,7 +112,11 @@ class Usuario extends CI_Controller {
 			$data["contenido"] = $this->load->view('bootstrap',$data,true);
 			$this->load->view('template',$data);
 
-		}else{
+		}elseif($this->session->userdata('is_logged') == true){
+			$data["main"] = true;
+			$data["contenido"] = $this->load->view('bootstrap',$data,true);
+			$this->load->view('template',$data);
+		} else {
 			$data = array();
 			$data["contenido"] = $this->load->view('login',$data,true);
 			$this->load->view('template',$data);
@@ -129,7 +137,9 @@ class Usuario extends CI_Controller {
 
 	public function datosPersonales(){
 		$this->load->model("propiedad_usuariomodel");
-		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades("registro",$this->session->userdata("idusuario"));
+		//var_dump($this->session->userdata("idusuario"));
+		$usuario = $this->session->userdata("idusuario");
+		$data["propiedades"] = $this->propiedad_usuariomodel->getPropiedades("registro",$usuario);
 		$this->load->view("usuario/datosPersonales",$data);
 	}
 

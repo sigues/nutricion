@@ -13,7 +13,8 @@ class Usuario_has_propiedad_usuario extends CI_Model {
     function guardar(){
     	$datos = array("usuario_idusuario"=>$this->usuario_idusuario,
                         "propiedad_usuario_idpropiedad_usuario"=>$this->idpropiedad_usuario,
-                        "valor"=>$this->valor);
+                        "valor"=>$this->valor,
+                        "fecha"=>date("Y-m-d H:i:s"));
         $valor = $this->db->insert("usuario_has_propiedad_usuario",$datos);
         return $valor;
     }
