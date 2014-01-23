@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2014 at 06:40 PM
+-- Generation Time: Jan 22, 2014 at 07:04 PM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -637,7 +637,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`idusuario`),
   UNIQUE KEY `correo_UNIQUE` (`correo`),
   KEY `fk_usuario_ciudad1_idx` (`ciudad_idciudad`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `usuario`
@@ -645,7 +645,10 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`idusuario`, `correo`, `contrasena`, `nombre`, `apellido`, `sexo`, `fechaNacimiento`, `perfil`, `ciudad_idciudad`) VALUES
 (1, 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', 'admin', 'admin', NULL, NULL, 2, NULL),
-(2, 'salvador@nutricion.com', 'e99a18c428cb38d5f260853678922e03', 'salvador', 'villegas', NULL, NULL, 1, NULL);
+(2, 'salvador@nutricion.com', 'e99a18c428cb38d5f260853678922e03', 'salvador', 'villegas', NULL, NULL, 1, NULL),
+(3, 'prueba@prueba.com', 'c893bad68927b457dbed39460e6afd62', 'prueba', 'prueba', NULL, NULL, 1, NULL),
+(4, 'prueba2@prueba.com', 'c893bad68927b457dbed39460e6afd62', 'prueba', 'prueba', NULL, NULL, 1, NULL),
+(5, 'prueba3@prueba.com', 'c893bad68927b457dbed39460e6afd62', 'prueba', 'prueba', NULL, NULL, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -740,16 +743,24 @@ CREATE TABLE IF NOT EXISTS `usuario_has_propiedad_usuario` (
   PRIMARY KEY (`idusuario_has_propiedad_usuario`),
   KEY `fk_usuario_has_propiedad_usuario_propiedad_usuario1_idx` (`propiedad_usuario_idpropiedad_usuario`),
   KEY `fk_usuario_has_propiedad_usuario_usuario_idx` (`usuario_idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `usuario_has_propiedad_usuario`
 --
 
 INSERT INTO `usuario_has_propiedad_usuario` (`usuario_idusuario`, `propiedad_usuario_idpropiedad_usuario`, `valor`, `fecha`, `idusuario_has_propiedad_usuario`) VALUES
-(1, 1, '70', NULL, 1),
-(1, 2, '170', NULL, 2),
-(1, 3, 'h', NULL, 3);
+(1, 1, '70', '2014-01-22 16:23:01', 1),
+(1, 2, '170', '2014-01-22 16:23:01', 2),
+(1, 3, 'h', '2014-01-22 16:23:01', 3),
+(5, 1, '70', '2014-01-22 16:23:01', 4),
+(5, 2, '167', '2014-01-22 16:23:01', 5),
+(5, 3, 'm', '2014-01-22 16:23:01', 6),
+(4, 1, '150', '2014-01-22 16:23:01', 10),
+(4, 2, '150', '2014-01-22 16:23:01', 11),
+(4, 3, 'm', '2014-01-22 16:23:01', 12),
+(1, 1, '68', '2014-01-23 16:00:00', 13),
+(1, 2, '175', '2014-01-23 17:07:38', 14);
 
 -- --------------------------------------------------------
 
@@ -768,12 +779,31 @@ CREATE TABLE IF NOT EXISTS `usuario_has_respuesta` (
   KEY `fk_usuario_has_respuesta_respuesta1_idx` (`respuesta_idrespuesta`),
   KEY `fk_usuario_has_respuesta_usuario1_idx` (`usuario_idusuario`),
   KEY `fk_usuario_has_respuesta_pregunta1_idx` (`pregunta_idpregunta`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `usuario_has_respuesta`
 --
 
+INSERT INTO `usuario_has_respuesta` (`idusuario_has_respuesta`, `usuario_idusuario`, `respuesta_idrespuesta`, `fecha`, `pregunta_idpregunta`, `valor`) VALUES
+(10, 1, 1, '2014-01-21 16:34:11', 1, 'false'),
+(11, 1, 2, '2014-01-21 16:34:11', 1, 'true'),
+(12, 1, 3, '2014-01-21 16:34:12', 1, 'false'),
+(13, 1, 4, '2014-01-21 16:34:12', 2, 'true'),
+(14, 1, 5, '2014-01-21 16:34:12', 2, 'false'),
+(15, 1, 6, '2014-01-21 16:34:13', 2, 'true'),
+(16, 1, 7, '2014-01-21 16:34:13', 2, 'false'),
+(17, 1, 8, '2014-01-21 16:34:13', 2, 'true'),
+(18, 1, 9, '2014-01-21 16:34:13', 2, 'false'),
+(19, 4, 1, '2014-01-21 18:11:54', 1, 'false'),
+(20, 4, 2, '2014-01-21 18:11:55', 1, 'true'),
+(21, 4, 3, '2014-01-21 18:11:55', 1, 'false'),
+(22, 4, 4, '2014-01-21 18:11:55', 2, 'false'),
+(23, 4, 5, '2014-01-21 18:11:55', 2, 'true'),
+(24, 4, 6, '2014-01-21 18:11:55', 2, 'false'),
+(25, 4, 7, '2014-01-21 18:11:55', 2, 'true'),
+(26, 4, 8, '2014-01-21 18:11:55', 2, 'false'),
+(27, 4, 9, '2014-01-21 18:11:55', 2, 'true');
 
 --
 -- Constraints for dumped tables
