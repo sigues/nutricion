@@ -211,7 +211,11 @@ class Usuario extends CI_Controller {
 			$respuesta = array("error"=>"El peso debe ser numerico");
 		}
 		echo json_encode($respuesta);
+	}
 
+	public function tablaListadoPeso(){
+		$idusuario = $this->session->userdata("idusuario");
+		echo listado_peso($idusuario,true);
 	}
 
 }
