@@ -87,7 +87,9 @@
                                 $(".datos_personales").colorbox({
                                   rel:'datos_personales',
                                   arrow_key : false,
-                                  <?=(!$this->session->userdata('datos_personales_cerrado') && $this->session->userdata('datos_personales_cerrado') != true)?"open:true,":""?>
+                                  <?=(!$this->session->userdata('datos_personales_cerrado') 
+                                    && $this->session->userdata('datos_personales_cerrado') != true
+                                    && $this->session->userdata('historial_cerrado') != true)?"open:true,":""?>
                                   onClosed:function(){ 
                                       $.ajax({
                                           url: $("#base_url").val()+"index.php/usuario/cierraDatosPersonales",
@@ -96,6 +98,7 @@
                                               estado:true
                                           }
                                       });
+                                      //location.reload();
                                   }
                                 });
                               });

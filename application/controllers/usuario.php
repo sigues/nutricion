@@ -9,7 +9,7 @@ class Usuario extends CI_Controller {
 		if($this->input->post("inputRegistro") == "registro"){
 			$registro = $this->validarFormulario($this->input->post());
 			if($registro == true){
-				//redirect('/usuario/controlpanel/', 'refresh');
+				redirect('/', 'refresh');
 			} 
 		}
 
@@ -182,12 +182,19 @@ class Usuario extends CI_Controller {
 				$this->preguntamodel->guardarRespuestaPaciente();
 			}
 		}
+		$this->session->set_userdata('tiene_historial',true);
 		$val = array("value"=>"ok");
 		echo json_encode($val);
 	}
 
 	public function cierraDatosPersonales(){
 		$this->session->set_userdata('datos_personales_cerrado',true);
+		$tiene_propiedades = $this->session->userdata("tiene_propiedades");
+		if($tiene_propiedades == true){
+			$this->session->set_userdata('historial_cerrado',true);
+		}else{
+			$this->session->set_userdata('tiene_propiedades',true);
+		}
 		echo json_encode(array("ok"=>"ok"));
 	}
 

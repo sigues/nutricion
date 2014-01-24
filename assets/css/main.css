@@ -280,3 +280,15 @@ to {-o-transform: rotate(359deg);}
 from {transform: rotate(0deg);}
 to {transform: rotate(359deg);}
 }
+
+#tablaListadoPeso {
+  overflow-y:scroll; 
+  height:250px;
+}
+
+.btn-lg {
+    border-radius: 6px;
+    font-size: 18px;
+    line-height: 1.33;
+    padding: 10px 16px;
+}

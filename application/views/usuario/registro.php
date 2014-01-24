@@ -49,7 +49,7 @@
 					</p>
 					<p>
             <input type="hidden" name="inputRegistro" id="inputRegistro" value="registro" />
-            <button type="button" class="btn btn-default btn-lg active" id="reset" name="reset">Limpiar formulario</button>
+            <button type="button" class="btn btn-default active" id="reset" name="reset">Limpiar formulario</button>
             <button type="button" class="btn btn-info active" name="registrarse" id="registrarse" value="registrarse">Registrarse</button>
 					</p>
 				</fieldset>

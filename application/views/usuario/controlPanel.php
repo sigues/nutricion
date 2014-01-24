@@ -8,4 +8,7 @@
         	<?=grafica_peso($this->session->userdata("idusuario"))?>
 		</div>
 	</div>
+    <div class="row">
+      		<?=dieta_paciente($this->session->userdata("idusuario"))?>
+	</div>
 </div>

@@ -49,6 +49,15 @@ class Dietamodel extends CI_Model {
         return $response;
     }
 
+    function getDietaByUsuario($idusuario){
+        $query = $this->db->get_where("usuario_has_dieta", array("usuario_idusuario"=>$idusuario));
+        $response = false;
+        foreach($query->result() as $row){
+            $response = $row;
+        }
+        return $response;
+    }
+
     function getPerfilesByDieta($iddieta){
         $query = $this->db->get_where("perfil_has_dieta", array("dieta_iddieta"=>$iddieta));
         $response = array();
