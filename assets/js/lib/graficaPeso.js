@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    inicializaGrafica(peso);
+    
+});
+
+function inicializaGrafica(peso){
+    $("#chart1").html("");
     $.jqplot._noToImageButton = true;
     var prevYear = peso;
  
@@ -14,6 +20,7 @@ $(document).ready(function () {
     var plot1 = $.jqplot("chart1", [prevYear], {
         seriesColors: ["rgba(78, 135, 194, 0.7)"],
         title: 'Seguimiento de peso',
+        dataRenderer: prevYear,
         highlighter: {
             show: true,
             sizeAdjust: 1,
@@ -81,4 +88,4 @@ $(document).ready(function () {
     });
  
       $('.jqplot-highlighter-tooltip').addClass('ui-corner-all')
-});
+}

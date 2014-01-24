@@ -2,7 +2,7 @@
 
     <div class="row">
       	<div class="span5">
-      	<br>sdcsdcsdc
+      		<?=listado_peso($this->session->userdata("idusuario"))?>
     	</div>
         <div class="span7">
         	<?=grafica_peso($this->session->userdata("idusuario"))?>

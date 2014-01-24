@@ -108,13 +108,11 @@ class Usuario extends CI_Controller {
 				$data["falloLogin"] = true;
 			}
 
-			$data["main"] = true;
-			$data["contenido"] = $this->load->view('bootstrap',$data,true);
+			$data["contenido"] = $this->load->view('usuario/controlPanel',$data,true);
 			$this->load->view('template',$data);
 
 		}elseif($this->session->userdata('is_logged') == true){
-			$data["main"] = true;
-			$data["contenido"] = $this->load->view('bootstrap',$data,true);
+			$data["contenido"] = $this->load->view('usuario/controlPanel',$data,true);
 			$this->load->view('template',$data);
 		} else {
 			$data = array();
@@ -191,6 +189,29 @@ class Usuario extends CI_Controller {
 	public function cierraDatosPersonales(){
 		$this->session->set_userdata('datos_personales_cerrado',true);
 		echo json_encode(array("ok"=>"ok"));
+	}
+
+	public function guardaPeso(){
+		if(is_numeric($_POST["peso"])){
+			$this->load->model("usuario_has_propiedad_usuario");
+			$this->usuario_has_propiedad_usuario->usuario_idusuario = $this->session->userdata("idusuario");
+			$this->usuario_has_propiedad_usuario->idpropiedad_usuario = 1;
+			$this->usuario_has_propiedad_usuario->valor = $_POST["peso"];
+			$this->usuario_has_propiedad_usuario->guardar();
+			$usuario = $this->session->userdata("idusuario");
+			$this->load->model("propiedad_usuariomodel");
+			$propiedades = $this->propiedad_usuariomodel->getPropiedades("registro",$usuario,true);
+			$respuesta = array();
+			foreach($propiedades as $propiedad){
+				if($propiedad->codigo == "peso"){
+					$respuesta[date("Y-m-d",strtotime($propiedad->fecha))] = $propiedad->valor;
+				}
+			}
+		}else{
+			$respuesta = array("error"=>"El peso debe ser numerico");
+		}
+		echo json_encode($respuesta);
+
 	}
 
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2014 at 07:04 PM
+-- Generation Time: Jan 23, 2014 at 06:55 PM
 -- Server version: 5.1.33
 -- PHP Version: 5.2.9
 
@@ -743,7 +743,7 @@ CREATE TABLE IF NOT EXISTS `usuario_has_propiedad_usuario` (
   PRIMARY KEY (`idusuario_has_propiedad_usuario`),
   KEY `fk_usuario_has_propiedad_usuario_propiedad_usuario1_idx` (`propiedad_usuario_idpropiedad_usuario`),
   KEY `fk_usuario_has_propiedad_usuario_usuario_idx` (`usuario_idusuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `usuario_has_propiedad_usuario`
@@ -759,8 +759,8 @@ INSERT INTO `usuario_has_propiedad_usuario` (`usuario_idusuario`, `propiedad_usu
 (4, 1, '150', '2014-01-22 16:23:01', 10),
 (4, 2, '150', '2014-01-22 16:23:01', 11),
 (4, 3, 'm', '2014-01-22 16:23:01', 12),
-(1, 1, '68', '2014-01-23 16:00:00', 13),
-(1, 2, '175', '2014-01-23 17:07:38', 14);
+(1, 1, '75', '2014-01-21 20:00:00', 17),
+(1, 1, '80', '2014-01-23 18:54:29', 18);
 
 -- --------------------------------------------------------
 
