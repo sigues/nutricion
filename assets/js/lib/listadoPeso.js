@@ -4,8 +4,9 @@ $(document).ready(function(){
 		if(isNaN(peso)){
 			alert("Peso invalido, favor de solo introducir numeros");
 		} else {
+			$("#listadoPeso").fadeOut(300);
+			$("#chart1").fadeOut(300);
 			peso = guardaPeso();
-			return false;
 			//inicializaGrafica(peso);
 		}
 	});
@@ -20,9 +21,6 @@ function guardaPeso(){
             peso : parseFloat($("#pesoActual").val())
         },
         success: function( arr ){
-//        	ret = data;
-//        	console.log(arr);
-
 		var line1 = [];
         
 
@@ -34,7 +32,18 @@ function guardaPeso(){
 			}
 
 			inicializaGrafica(peso);
-//		    return ret;
+			recargaTabla();
         }
     });
+}
+
+function recargaTabla(){
+	$.ajax({
+        url: $("#base_url").val()+"index.php/usuario/tablaListadoPeso",
+        success: function( data ){
+        	$("#tablaListadoPeso").html(data);
+			$("#chart1").fadeIn(1000);
+			$("#listadoPeso").fadeIn(1000);
+    	}
+	});
 }

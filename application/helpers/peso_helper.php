@@ -38,7 +38,7 @@ if ( ! function_exists('grafica_peso'))
 	}
 }
 
-	function listado_peso($idusuario){
+	function listado_peso($idusuario,$tabla = false){
 		$CI =& get_instance();
 		$CI->load->model("propiedad_usuariomodel");
 		$propiedades = $CI->propiedad_usuariomodel->getPropiedades("registro",$idusuario,true);
@@ -58,6 +58,10 @@ if ( ! function_exists('grafica_peso'))
 		}
 		$data["pesoString"] = ($data["pesoString"] != "") ? "[".substr($data["pesoString"],0,-1)."]" : $data["pesoString"];
 		$data["tallaString"] = ($data["tallaString"] != "") ? "[".substr($data["tallaString"],0,-1)."]" : $data["tallaString"];
-		$contenido = $CI->load->view("usuario/listadoPeso",$data,true);
+		if($tabla == false){
+			$contenido = $CI->load->view("usuario/listadoPeso",$data,true);
+		} else {
+			$contenido = $CI->load->view("usuario/tablaListadoPeso",$data,true);
+		}
 		return $contenido;
 	}
