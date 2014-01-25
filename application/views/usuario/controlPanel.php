@@ -1,4 +1,4 @@
-<div class="container marketing" id="nosotros">
+<div class="container marketing">
 
     <div class="row">
       	<div class="span5">

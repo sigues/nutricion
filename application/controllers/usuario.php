@@ -44,7 +44,9 @@ class Usuario extends CI_Controller {
                    'perfil'	 => $this->input->post("email"),
                    'is_logged' => TRUE,
                    'tiene_propiedades' => FALSE,
-                   'tiene_historial' => FALSE
+                   'tiene_historial' => FALSE,
+                   'datos_personales_cerrado' => FALSE,
+                   'historial_cerrado' => FALSE
                );
 			$this->session->set_userdata($newdata);
 
@@ -91,8 +93,10 @@ class Usuario extends CI_Controller {
 
 				$preguntasHistorial = $this->preguntamodel->estadoPreguntas("historial",$usuario["idusuario"]);
 				$tiene_historial = true;
+				$historial_cerrado = true;
 				if($preguntasHistorial == false){
 					$tiene_historial = false;
+					$historial_cerrado = false;
 				}
 
 					$newdata = array(
@@ -101,7 +105,8 @@ class Usuario extends CI_Controller {
 	                   'perfil'	 => $usuario["perfil"],
 	                   'is_logged' => true,
 	                   'tiene_propiedades' => $tiene_propiedades,
-	                   'tiene_historial' => $tiene_historial
+	                   'tiene_historial' => $tiene_historial,
+	                   'historial_cerrado' => $historial_cerrado
 	               );
 				$this->session->set_userdata($newdata);
 			} else {
@@ -195,6 +200,7 @@ class Usuario extends CI_Controller {
 		}else{
 			$this->session->set_userdata('tiene_propiedades',true);
 		}
+		var_dump($this->session->all_userdata());
 		echo json_encode(array("ok"=>"ok"));
 	}
 
@@ -224,5 +230,20 @@ class Usuario extends CI_Controller {
 		$idusuario = $this->session->userdata("idusuario");
 		echo listado_peso($idusuario,true);
 	}
+
+	public function solicitarCita(){
+		$data["contenido"] = $this->load->view("usuario/solicitarCita","",true);
+		$this->load->view("template",$data);
+	}
+
+    public function diaDoctor(){
+        $data["nutriologo"] = $this->uri->segment(4);
+        $fecha = explode("-",$this->uri->segment(3));
+        $data["fecha"] = $fecha[2]."-".$fecha[1]."-".$fecha[0];
+        $this->db->order_by("horaInicio","asc");
+        $data["citas"] = $this->db->get_where("cita",$data)->result();
+        //echo $this->db->last_query();
+        $this->load->view("ajax/diaDoctorUsuario",$data);
+    }
 
 }

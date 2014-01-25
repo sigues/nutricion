@@ -79,7 +79,8 @@
                                 echo "<li><a class='datos_personales' rel='colorbox' href='".site_url()."/usuario/datosPersonales'>Llenar datos personales</a></li>"; ?>
                 <?php } ?>
                 <?php 
-                if($this->session->userdata("is_logged")==true && $this->session->userdata("tiene_historial")==false){ ?>
+                //var_dump($this->session->all_userdata());
+                if($this->session->userdata("is_logged")==true && $this->session->userdata("tiene_historial")==false && $this->session->userdata('tiene_propiedades') == true){ ?>
                           <li ><a class='datos_personales' rel='colorbox' href='<?=site_url()?>/usuario/historiaNutricion'>Historia nutricional</a></li>
                 <?php } ?>
                             <script type='text/javascript'>
@@ -87,18 +88,20 @@
                                 $(".datos_personales").colorbox({
                                   rel:'datos_personales',
                                   arrow_key : false,
-                                  <?=(!$this->session->userdata('datos_personales_cerrado') 
-                                    && $this->session->userdata('datos_personales_cerrado') != true
-                                    && $this->session->userdata('historial_cerrado') != true)?"open:true,":""?>
+                                  <?=(($this->session->userdata('datos_personales_cerrado') != true
+                                    && !$this->session->userdata('datos_personales_cerrado')) 
+                                    || $this->session->userdata('historial_cerrado') != true)?"open:true,":""?>
                                   onClosed:function(){ 
                                       $.ajax({
                                           url: $("#base_url").val()+"index.php/usuario/cierraDatosPersonales",
                                           type: "post",
                                           data:{
                                               estado:true
+                                          },
+                                          success: function( strData ){
+                                            window.location=$("#base_url").val()+"index.php";
                                           }
                                       });
-                                      //location.reload();
                                   }
                                 });
                               });

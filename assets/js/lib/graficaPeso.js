@@ -44,7 +44,42 @@ function inicializaGrafica(peso){
                     show: true
                 }
             },
-            showMarker: false
+            showMarker: true,
+            show: true,     // wether to render the series.
+            xaxis: 'xaxis', // either 'xaxis' or 'x2axis'.
+            yaxis: 'yaxis', // either 'yaxis' or 'y2axis'.
+            label: '',      // label to use in the legend for this line.
+            color: '',      // CSS color spec to use for the line.  Determined automatically.
+            lineWidth: 2.5, // Width of the line in pixels.
+            shadow: true,   // show shadow or not.
+            shadowAngle: 45,    // angle (degrees) of the shadow, clockwise from x axis.
+            shadowOffset: 1.25, // offset from the line of the shadow.
+            shadowDepth: 3,     // Number of strokes to make when drawing shadow.  Each
+                                // stroke offset by shadowOffset from the last.
+            shadowAlpha: 0.1,   // Opacity of the shadow.
+            showLine: true,     // whether to render the line segments or not.
+            showMarker: true,   // render the data point markers or not.
+            fill: true,        // fill under the line,
+            fillAndStroke: true,       // *stroke a line at top of fill area.
+            fillColor: undefined,       // *custom fill color for filled lines (default is line color).
+            fillAlpha: undefined,       // *custom alpha to apply to fillColor.
+            renderer: $.jqplot.LineRenderer,    // renderer used to draw the series.
+            rendererOptions: {}, // options passed to the renderer.  LineRenderer has no options.
+            markerRenderer: $.jqplot.MarkerRenderer,    // renderer to use to draw the data
+                                                        // point markers.
+            markerOptions: {
+                show: true,             // wether to show data point markers.
+                style: 'filledCircle',  // circle, diamond, square, filledCircle.
+                                        // filledDiamond or filledSquare.
+                lineWidth: 2,       // width of the stroke drawing the marker.
+                size: 9,            // size (diameter, edge length, etc.) of the marker.
+                shadow: true,       // wether to draw shadow on marker or not.
+                shadowAngle: 45,    // angle of the shadow.  Clockwise from x axis.
+                shadowOffset: 1,    // offset from the line of the shadow,
+                shadowDepth: 3,     // Number of strokes to make when drawing shadow.  Each stroke
+                                    // offset by shadowOffset from the last.
+                shadowAlpha: 0.07   // Opacity of the shadow
+            }
         },
         series: [
             {
@@ -81,7 +116,7 @@ function inicializaGrafica(peso){
                 },
                 tickOptions: {
                     formatString: "%'d kg",
-                    showMark: false
+                    showMark: true
                 }
             }
         }
