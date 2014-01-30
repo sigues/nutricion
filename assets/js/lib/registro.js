@@ -49,7 +49,7 @@ $(document).ready(function(){
 
 	$("#registrarse").click(function(){
 		if($("#validaEmail").is(":visible")){
-			alert("huevos puto");
+			alert("Debe ingresar una dirección de correo electrónico válida");
 			return false;
 		}
 		$("#registro").submit();

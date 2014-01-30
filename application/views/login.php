@@ -9,7 +9,10 @@
 				<fieldset>
 						<legend>Iniciar Sesión</legend>
 		          <br>
-		          <div class="control-group">
+		          <?php if(@$error == "login") { ?>
+		          	<div class="alert alert-danger">Error al iniciar sesión, Usuario y contraseña no concuerdan. <a href="<?=base_url()?>index.php/usuario/registro"> O regístrate aquí</a></div>
+		          <?php } ?>
+		          	<div class="control-group">
 				    	<label class="control-label" for="email">Correo Electrónico</label>
 				    	<div class="controls">
 				    	<input type="text" id="correo" name="correo" placeholder="Correo Electrónico">

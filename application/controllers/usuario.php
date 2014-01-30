@@ -9,7 +9,7 @@ class Usuario extends CI_Controller {
 		if($this->input->post("inputRegistro") == "registro"){
 			$registro = $this->validarFormulario($this->input->post());
 			if($registro == true){
-				redirect('/', 'refresh');
+				redirect(base_url()."index.php", 'refresh');
 			} 
 		}
 
@@ -82,7 +82,6 @@ class Usuario extends CI_Controller {
 
 			$data["falloLogin"] = false;
 			$usuario = $this->usuariomodel->getUsuarioLogin($correo,$contrasena);
-
 			if(sizeof($usuario)>0){
 				$propiedad_usuario = $this->propiedad_usuariomodel->getPropiedad_usuarios($usuario["idusuario"]);
 				if(sizeof($propiedad_usuario)>0){
@@ -109,11 +108,14 @@ class Usuario extends CI_Controller {
 	                   'historial_cerrado' => $historial_cerrado
 	               );
 				$this->session->set_userdata($newdata);
+				$data["contenido"] = $this->load->view('usuario/controlPanel',$data,true);
+			
 			} else {
+				$data["error"] = "login";
+				$data["contenido"] = $this->load->view('login',$data,true);
 				$data["falloLogin"] = true;
 			}
 
-			$data["contenido"] = $this->load->view('usuario/controlPanel',$data,true);
 			$this->load->view('template',$data);
 
 		}elseif($this->session->userdata('is_logged') == true){
