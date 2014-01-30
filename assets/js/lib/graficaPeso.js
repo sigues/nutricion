@@ -83,17 +83,10 @@ function inicializaGrafica(peso){
         },
         series: [
             {
-                fill: true,
-                label: 'peso'
+                label: ' ',
+                fill: true
             }
         ],
-        axesDefaults: {
-            rendererOptions: {
-                baselineWidth: 1.5,
-                baselineColor: '#444444',
-                drawBaseline: false
-            }
-        },
         axes: {
             xaxis: {
                 renderer: $.jqplot.DateAxisRenderer,
@@ -109,11 +102,8 @@ function inicializaGrafica(peso){
                 drawMajorGridlines: false
             },
             yaxis: {
-                renderer: $.jqplot.LogAxisRenderer,
-                pad: 0,
-                rendererOptions: {
-                    minorTicks: 1
-                },
+                label: 'peso',
+                labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                 tickOptions: {
                     formatString: "%'d kg",
                     showMark: true
@@ -122,5 +112,5 @@ function inicializaGrafica(peso){
         }
     });
  
-      $('.jqplot-highlighter-tooltip').addClass('ui-corner-all')
+//      $('.jqplot-highlighter-tooltip').addClass('ui-corner-all')
 }
