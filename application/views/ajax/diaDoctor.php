@@ -101,7 +101,7 @@ foreach($citas as $cita){
         }
     }
     $horaFin    = $cita->horaFin;
-    $tabla.="<tr>
+    $tabla.="<tr class='horarioOcupado'>
                 <td>".date("H:i",strtotime($horaInicio))." - ".date("H:i",strtotime($horaFin))."</td><td>Ocupado</td>
             </tr>";
 }

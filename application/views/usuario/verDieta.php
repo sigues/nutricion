@@ -1,4 +1,7 @@
-<div class="span8">
+<div class="row">
+	<script src="<?=base_url()?>assets/js/lib/verDieta.js"></script>
+
+<div class="span12">
 	<table class="table">
 		<thead>
 			<tr>
@@ -6,7 +9,7 @@
 				<th>Alimentos</th>
 				<?php
 					foreach($horarios as $horario){
-						echo "<th>".$horario->nombre."</th>";
+						echo "<th><span class='horario' onclick='muestraAlimentos(".$horario->idhorario.");'>".$horario->nombre."<span></th>";
 					}
 				?>
 			</tr>
@@ -31,8 +34,11 @@
 		</tbody>
 	</table>
 </div>
-<div class="span4">
-	<div id="muestraAlimentos">
-		Selecciona una porción de tu dieta para ver sugerencias.
+</div>
+<div class="row">
+	<div class="span12">
+		<div id="muestraAlimentos">
+			Selecciona una porción de tu dieta para ver sugerencias.
+		</div>
 	</div>
 </div>

@@ -1,4 +1,12 @@
-RewriteEngine on
-RewriteBase /ipaw 
-RewriteCond $1 !^(index\.php|assets|images|js|css|php-scripts|robots\.txt)
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+ 
+    # Removes access to the system folder by users
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php/$1 [L]
+ 
+    # Checks to see if the user is attempting to access a valid file
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]

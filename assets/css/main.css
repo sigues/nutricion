@@ -292,3 +292,24 @@ to {transform: rotate(359deg);}
     line-height: 1.33;
     padding: 10px 16px;
 }
+
+.horario {
+    cursor: pointer;
+    color: gray;
+}
+
+.horario:hover{
+  color :blue;
+}
+
+.horarioOcupado{
+  background-color: #dfdfdf;
+}
+
+.horas{
+  cursor:pointer;
+}
+
+#loadingCita{
+  display: none;
+}

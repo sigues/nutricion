@@ -14,6 +14,6 @@
 </script>
 
 <script type="text/javascript" src="<?=base_url()?>assets/js/lib/graficaPeso.js"></script>
-
+<div><b>Peso</b></div>
 <div id="chart1" class="jqplot-target" style="position: relative;">
 </div>

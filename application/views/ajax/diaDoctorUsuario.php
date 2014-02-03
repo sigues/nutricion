@@ -58,22 +58,22 @@ function separaHoras($horaInicio,$horaFin,$parametro = 30,$debug=FALSE){
                     $diferencia = abs($to_time - $from_time) / 60;
                     //echo $to_time."($horaFinLibre) - ".$from_time."($horaFin) - ".$diferencia." <br>";
                     //var_dump($diferencia);
-                    $tabla.="<tr>
-                                <td><span onclick='actualizaHoras(this.innerHTML);'>".$horaInicioLibre." - ".$horaFinLibre."</span></td><td>Libre</td>
+                    $tabla.="<tr class='horarioLibre'>
+                                <td><span onclick='actualizaHoras(this.innerHTML,this);' class='horas'>".$horaInicioLibre." - ".$horaFinLibre."</span></td><td>Libre</td>
                             </tr>";
                 }
             } else {
                 $horaInicioLibre = date("H:i",strtotime($horaInicio));
                 $horaFinLibre = date("H:i",strtotime($horaFIn));
-                $tabla.="<tr>
-                            <td><span onclick='actualizaHoras(this.innerHTML);'>".$horaInicioLibre." - ".$horaFinLibre."</span></td><td>Libre</td>
+                $tabla.="<tr class='horarioLibre'>
+                            <td><span onclick='actualizaHoras(this.innerHTML,this);' class='horas'>".$horaInicioLibre." - ".$horaFinLibre."</span></td><td>Libre</td>
                         </tr>";
             }
         }
         return $tabla;
 }
 
-$tabla="<table class='table'>";
+$tabla="<table class='table' id='tablaHorarios'>";
 $i=0;
 foreach($citas as $cita){
     if($cita->horaInicio>"08:00"&&$i==0){
@@ -101,7 +101,7 @@ foreach($citas as $cita){
         }
     }
     $horaFin    = $cita->horaFin;
-    $tabla.="<tr>
+    $tabla.="<tr class='horarioOcupado'>
                 <td>".date("H:i",strtotime($horaInicio))." - ".date("H:i",strtotime($horaFin))."</td><td>Ocupado</td>
             </tr>";
 }

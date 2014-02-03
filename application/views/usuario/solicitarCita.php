@@ -13,7 +13,7 @@
 				                <label for="fecha">Fecha</label> <div id="fecha_error"></div>
 				            </td>
 				            <td>
-				                <input type="text" id="fecha" value="" />
+				                <input type="text" id="fecha" value="" />&nbsp;<img src="<?=base_url()?>assets/images/datepicker.jpeg" style="margin-bottom:15px" />
 				            </td>
 				        </tr>
 					</table>
@@ -29,6 +29,7 @@
 				            <td>
 			                	<button class="btn btn-lg btn-primary" id="botonSolicitarCita">
 									Solicitar cita
+					            	<span id="loadingCita"><img src="<?=base_url()?>assets/images/loading.gif" /></span>
 								</button>
 							</td>
 				        </tr>

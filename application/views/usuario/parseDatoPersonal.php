@@ -5,8 +5,8 @@
         $checkedm = ($propiedad->respuesta == 'm')?"checked=checked":"";
         echo "<td>".$propiedad->nombre.'</td><td>
         <input type="radio" name="'.$propiedad->idpropiedad_usuario.'" 
-        idpropiedad_usuario="'.$propiedad->idpropiedad_usuario.'" id="'.$propiedad->codigo.'" value="h" '.$checkedh.'>Hombre 
-        <input type="radio" name="'.$propiedad->idpropiedad_usuario.'" id="'.$propiedad->codigo.'" idpropiedad_usuario="'.$propiedad->idpropiedad_usuario.'" value="m"  '.$checkedm.'>Mujer</td>';
+        idpropiedad_usuario="'.$propiedad->idpropiedad_usuario.'" id="'.$propiedad->codigo.'" value="h" '.$checkedh.'>Masculino 
+        <input type="radio" name="'.$propiedad->idpropiedad_usuario.'" id="'.$propiedad->codigo.'" idpropiedad_usuario="'.$propiedad->idpropiedad_usuario.'" value="m"  '.$checkedm.'>Femenino</td>';
     }else{ ?>
         <td><?=$propiedad->nombre?>
             <?=($propiedad->codigo == "peso")?"(kg)":""?>

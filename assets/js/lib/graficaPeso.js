@@ -93,16 +93,19 @@ function inicializaGrafica(peso){
                 tickRenderer: $.jqplot.CanvasAxisTickRenderer,
                 tickOptions: {
                     formatString: "%b %e",
-                    angle: -30,
-                    textColor: '#dddddd'
+                    angle: -40,
+                    textColor: '#777777'
                 },
                 min: fechaInicio,
                 max: fechaFin,
                 tickInterval: "7 days",
+                numberTicks: 4,
+                show:true,
+                pad: 1.2,       // a factor multiplied by the data range on the axis to give the
                 drawMajorGridlines: false
             },
             yaxis: {
-                label: 'peso',
+                label: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
                 labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
                 tickOptions: {
                     formatString: "%'d kg",

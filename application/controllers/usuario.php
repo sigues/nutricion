@@ -248,4 +248,106 @@ class Usuario extends CI_Controller {
         $this->load->view("ajax/diaDoctorUsuario",$data);
     }
 
+    public function muestraAlimentosHorario(){
+    	$usuario = $this->session->userdata("idusuario");
+    	$horario = $this->input->post("horario");
+    	$this->load->model("dietamodel");
+    	$this->load->model("alimentomodel");
+    	$dieta = $this->dietamodel->getDietaByUsuario($usuario);
+    	$grupos = $this->dietamodel->getGruposByDieta($dieta->dieta_iddieta);
+
+    	$grupos_horario = array();
+    	$contenidoAlimentos = "";
+    	$x = 0;
+		echo "<div class='row'>";
+    	foreach($grupos as $c=>$grupo){
+    		if($grupo->horario_idhorario == $horario){
+    			$grupos_horario[$c] = $grupo;
+    			$data["grupo"] = $grupo;
+    			$alimentos = $this->alimentomodel->getAlimentosByGrupo($grupo->grupo_idgrupo);
+    			foreach($alimentos as $alimento){
+					if($x == 4){
+	    				echo "</div><div class='row'>";
+	    				$x = 0;
+	    			}
+	    			$data["alimento"] = $alimento;
+	    			$contenidoAlimentos .= $this->load->view("usuario/verAlimento",$data,true);
+	    	
+    			}
+    		}
+    	}
+    	echo $contenidoAlimentos;
+    	echo "</div>";
+    }
+
+    function solicitarCitaAjax(){
+    	$this->load->model("usuariomodel");
+
+
+    	$data["usuario_idusuario"] = $this->session->userdata("idusuario");
+
+    	$myDateTime = DateTime::createFromFormat('d/m/Y', $this->input->post("fecha"));
+		$newDateString = $myDateTime->format('Y-m-d');
+
+    	$data["fecha"] = $newDateString;
+    	$data["horaInicio"] = $this->input->post("horaInicio");
+    	$data["horaFin"] = $this->input->post("horaFin");
+    	$data["costo"] = 300;
+    	$data["nutriologo"] = 1;
+    	$data["estado"] = "reservada";
+    	$data["estadoFinanciero"] = "pendiente";
+
+    	$this->db->insert("cita",$data);
+    	$data["idcita"] = $this->db->insert_id();
+
+		$data["usuario"] = $this->usuariomodel->getUsuario($data["usuario_idusuario"]);
+		$data["nutriologo"] = $this->usuariomodel->getUsuario($data["nutriologo"]);
+
+		$this->correoSolicitarCita($data);
+    	echo $data["idcita"];
+//    	var_dump($data);
+//    	echo $idusuario."->".$fecha."->".$horaInicio."->".$horaFin;
+    }
+
+    function correoSolicitarCita($data){
+
+		$to = $data["usuario"]->correo;
+
+		$subject = 'Solicitud de cita en Nutink.com';
+
+		$headers = "From: " . strip_tags("nutricion@nutink.com") . "\r\n";
+		$headers .= "Reply-To: ". strip_tags("nutricion@nutink.com") . "\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+		$message = '<html><body>';
+		//$message .= '<img src="http://css-tricks.com/examples/WebsiteChangeRequestForm/images/wcrf-header.png" alt="Website Change Request" />';
+		$message .= '<h1>Solicitud de cita en Nutink.com</h1>';
+		$message .= '<table rules="all" style="border-color: #666;" cellpadding="10">';
+		$message .= "<tr style='background: #eee;'><td><strong>Nombre:</strong> </td><td>" . $data["usuario"]->nombre." ".$data["usuario"]->apellido . "</td></tr>";
+		$message .= "<tr><td><strong>Nutri&oacute;logo:</strong> </td><td>" . $data["nutriologo"]->nombre." ".$data["nutriologo"]->apellido . "</td></tr>";
+		$message .= "<tr><td><strong>Fecha solicitada:</strong> </td><td>" . date("d-m-Y",strtotime($data["fecha"])) . "</td></tr>";
+		$message .= "<tr><td><strong>Horario:</strong> </td><td>" . $data["horaInicio"]." - ".$data["horaFin"] . "</td></tr>";
+		$message .= "<tr><td><strong>Confirmar cita:</strong> </td><td>" . base_url()."index.php/usuario/confirmarCita/".$data["idcita"] . "</td></tr>";
+		//$addURLS = $_POST['addURLS'];
+		$message .= "</table>";
+		$message .= "</body></html>";
+
+		mail($to, $subject, $message, $headers);
+		mail("nutricion@nutink.com", $subject, $message, $headers);
+    }
+
+    function avisoConfirmarCita(){
+    	$data["contenido"] = $this->load->view("usuario/avisoConfirmarCita","",true);
+    	$this->load->view("template",$data);
+    }
+
+    function confirmarCita(){
+    	$idcita = $this->uri->segment(3);
+    	$this->load->model("citamodel");
+    	$data["cita"] = $this->citamodel->getCita($idcita);
+    	$data["contenido"] = $this->load->view("usuario/confirmarCita",$data,true);
+    	$this->load->view("template",$data);
+    }
+
 }
